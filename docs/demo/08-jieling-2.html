@@ -1,10 +1,7 @@
 <!doctype html><html><head><meta charset=utf-8><style>
-/* 模板 A · 渐变编辑风 —— 产品截图页  (v2, 2026-08-10)
-   head 52px 说明标题 + 真实产品截图卡 + foot 数据标注。
-   截图必须完整、铺满、干净（无违禁词露出）。
-   portrait 手机图 → .shot{height:100%}（默认）
-   landscape/近方图 → .shot{width:100%;height:auto} + .shot img{width:100%;height:auto}
-   ⚠️ kicker/foot 用第一人称叙述，绝不写「真实产品截图」「产品 demo」。 */
+/* 模板 A · 渐变编辑风 —— 正文页  (v2, 2026-08-10)
+   正文统一 44px / lh 1.9。每张写满 2-3 段，别一段一张、别大片留白。
+   .em 深梅紫强调；.en 英文词红棕斜体；.last 收尾段加粗一档。 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',serif;color:#2b2620;overflow:hidden;}
@@ -18,21 +15,20 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
 .frame > *{position:relative;z-index:1;}
 .kicker{font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;font-weight:500;letter-spacing:0.2em;color:#8d7d9e;
   padding-bottom:20px;border-bottom:1px solid rgba(90,70,95,0.16);}
-.head{font-size:52px;font-weight:900;line-height:1.34;color:#1a1420;margin-top:30px;}
-.head .em{color:#6b3f8f;}
-.shotwrap{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin-top:34px;}
-.shot{width:100%;height:auto;max-height:100%;border-radius:26px;overflow:hidden;border:1px solid rgba(90,70,95,0.26);box-shadow:0 22px 54px rgba(60,40,70,0.26);}
-.shot img{width:100%;display:block;}
-/* 横构图截图放进竖版 slide，图和 foot 之间必然空一块 ——
-   用这段解读把它撑满。竖构图截图铺满高度时，把整个 .note 删掉。 */
-.note{font-size:34px;line-height:1.75;color:#4a4348;margin-top:30px;}
-.note .em{color:#6b3f8f;font-weight:500;}
-.foot{margin-top:34px;padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
+.body{flex:1;font-size:44px;font-weight:400;line-height:1.9;color:#302c2e;margin-top:46px;}
+.body p{margin-bottom:38px;}
+.body p:last-child{margin-bottom:0;}
+.body .em{color:#6b3f8f;font-weight:500;}
+.body .en{color:#8a5a52;font-style:italic;}
+.body .last{font-weight:500;}
+.foot{padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
   font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">
 <div class="kicker">节气手记 · 01</div>
-<div class="head">五脏各有各的<span class="em">负载曲线</span></div>
-<div class="shotwrap"><div class="shot"><img src="assets/wuyun-cards.jpg"/></div></div>
-<div class="note">左边这张标的是位置，右边那个五边形标的是<span class="em">负载</span>——哪一角鼓出来就是这段时间使力最多的地方，凹下去的是撑不上劲的。入伏这几天，多数人凹的是同一个角。</div>
-<div class="foot"><span>灵伴 AI · 五脏读数</span><span>木肝 · 火心 · 土脾 · 金肺 · 水肾</span></div>
+<div class="body">
+  <p>入伏这几天，很多人会同时出现这几样：早上起不来，中午吃两口就饱，下午三四点整个人是沉的，晚上又睡不踏实。</p>
+  <p>这不是意志力的问题。三伏是一年里最特殊的一段——<span class="em">外面最热，人身上的热却都浮在体表，里头反而是空的</span>。</p>
+  <p>古人干脆把这段从夏天里单拎出来，另给了个名字叫「长夏」。单独命名，就是因为它跟前面两个月的规律不一样。</p>
+</div>
+<div class="foot"><span>灵伴 AI · AURAMATE</span><span>auramate.net</span></div>
 </div></body></html>

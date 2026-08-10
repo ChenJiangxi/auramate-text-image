@@ -13,8 +13,11 @@
 
    ⚠️ 横带里放什么，决定了用 cover 还是 contain：
      氛围插画（可裁）→ object-fit:contain + object-position 调主体位置。默认。
-     信息图 / 产品截图（不可裁）→ .illo img{object-fit:contain} + 给 .illo 一个
-       跟图底色接近的背景。图表和截图是**信息**，裁掉一块就是残的。
+     信息图 / 产品截图（不可裁）→ 有两种放法：
+       · 横构图（图表、宽截图）：留出血横带 + object-fit:contain + 配底色
+       · 近方形（雷达图、五边形）：**别塞进出血横带**，会左右留一大片底色。
+         改成居中圆角卡 —— 去掉 margin 负值，img 用 height:100%;width:auto，
+         图自己就是那张卡，浅渐变露在两边，看着是设计不是没填满。
      踩过：benchmark 图和天赋雷达都按 cover 放进横带，柱子标签和顶点数字被切掉，
      用户一眼看出来「插图被截得不完整」。
 
@@ -37,14 +40,14 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
 .titlewrap{flex:1;display:flex;align-items:center;min-height:0;}
 .title{font-size:132px;font-weight:900;line-height:1.28;letter-spacing:-0.02em;color:#1a1420;}
 .title .em{color:#6b3f8f;}
-.illo{background:#2a2624;height:400px;flex-shrink:0;margin:0 -88px;}
-.illo img{width:100%;height:100%;object-fit:contain;object-position:center 76%;display:block;
-  box-shadow:0 -8px 28px rgba(72,48,92,0.12);}
+.illo{height:520px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.illo img{height:100%;width:auto;max-width:100%;border-radius:24px;object-position:center 76%;display:block;
+  box-shadow:0 18px 44px rgba(72,48,92,0.24);}
 .foot{margin-top:38px;padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
   font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">
 <div class="kicker">灵伴 AI · 节气手记</div>
-<div class="titlewrap"><div class="title">入伏这几天，<br/>身体最先<br/><span class="em">扛不住的地方</span></div></div>
-<div class="illo"><img src="assets/wuyun-liuqi.jpg"/></div>
+<div class="titlewrap"><div class="title">一入伏就没胃口、<br/>吃完就困，<br/><span class="em">不是你懒</span></div></div>
+<div class="illo"><img src="assets/wuyun-radar.jpg"/></div>
 <div class="foot"><span>AURAMATE</span><span>auramate.net</span></div>
 </div></body></html>

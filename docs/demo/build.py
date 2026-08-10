@@ -29,8 +29,10 @@ CARD_BODY  = load('card-light/body.html')
 
 
 def cover(out, kicker, title_html, illo, title_px=132, illo_h=400, pos='center 76%',
-          fit='cover', bg=None):
-    """fit='contain' + bg=底色：信息图/截图不可裁。默认 cover 只给氛围插画用。"""
+          fit='cover', bg=None, card=False):
+    """fit='contain' + bg：横构图信息图不可裁。
+       card=True：近方形信息图（雷达 / 五边形）—— 居中圆角卡，不出血，
+       图自己就是卡，两边露浅渐变。塞进出血横带会左右留一大片底色。"""
     s = COVER
     s = s.replace('灵伴 AI · {{系列名}}', kicker)
     s = s.replace('{{标题第一行}}，<br/>{{标题第二行}}，<br/>{{第三行含}}<span class="em">{{accent词}}</span>', title_html)
@@ -43,8 +45,16 @@ def cover(out, kicker, title_html, illo, title_px=132, illo_h=400, pos='center 7
         s = s.replace('object-position:center 76%', 'object-position:%s' % pos)
     if fit != 'cover':
         s = s.replace('object-fit:cover', 'object-fit:%s' % fit)
-    if bg:
+    if bg and not card:
         s = s.replace('.illo{height:%dpx' % illo_h, '.illo{background:%s;height:%dpx' % (bg, illo_h))
+    if card:
+        s = s.replace('.illo{height:%dpx;flex-shrink:0;margin:0 -88px;}' % illo_h,
+                      '.illo{height:%dpx;flex-shrink:0;display:flex;align-items:center;'
+                      'justify-content:center;}' % illo_h)
+        s = s.replace('.illo img{width:100%;height:100%;object-fit:contain;',
+                      '.illo img{height:100%;width:auto;max-width:100%;border-radius:24px;')
+        s = s.replace('box-shadow:0 -8px 28px rgba(72,48,92,0.12);',
+                      'box-shadow:0 18px 44px rgba(72,48,92,0.24);')
     write(out, s)
 
 
@@ -279,23 +289,52 @@ body('05-baziqa-3.html', '模型测评 · 02', [
 
 
 # ════════════════════════════════════════════════════════════════
-# 06 · 使用教程（收藏率天花板）
+# 06 · 使用教程（收藏率天花板）—— 完整 5 张
+#     ⚠️ 上一版是废稿：3 张里没有一张交代「这是什么报告」，封面承诺「看懂一个八边形」
+#        但正文从没说八个角分别是什么；「第一步」后面没有第二步；术语（边缘系统 / 小脑）
+#        直接扔给读者。用户：「文字内容很差劲，完全不知道在讲什么」。
+#     教程的核心价值 = **把术语翻译成日常行为**。这一版把翻译表当主菜。
+#     配图：封面全图 + 内页放大到最高/最低两角，两个视角各证各的话。
+#     ⚠️ 这个功能另外两张截图（最佳赛道推荐 / 整体天赋画像）满屏文字且含
+#        日主·偏印·七杀，双重踩线，不能用。
 # ════════════════════════════════════════════════════════════════
 cover('06-jiaocheng-1.html', '灵伴 AI · 报告怎么读',
-      '这份报告，<br/>看懂一个八边形<br/><span class="em">就够了</span>',
-      'assets/radar.png', illo_h=560, fit='contain', bg='#201d1b')
+      '那张八边形，<br/>其实只用看<br/><span class="em">两个角</span>',
+      'assets/radar.png', title_px=150, illo_h=560, fit='contain', card=True)
 
-shot('06-jiaocheng-2.html', '报告怎么读 · 01',
-     '第一步：<span class="em">先看那个八边形</span>',
-     'assets/radar.png', '灵伴 AI · 天赋脑图', '八个维度 · 分数越高越突出')
+body('06-jiaocheng-2.html', '报告怎么读 · 01', [
+ '天赋脑图跑完，出来的是一个八边形：八个角是八个脑区，每个角带一个分数。',
+ '多数人打开先找最高分，看完一句「哦我边缘系统 85」，然后就没有然后了。',
+ '<span class="em">分数本身没什么用</span>——它不是排名，也不跟别人比。'
+ '有用的是这张图的形状：哪个角鼓出来，哪个角凹下去。',
+])
 
-body('06-jiaocheng-3.html', '报告怎么读 · 02', [
- '很多人打开就往下拉找结论，其实<span class="em">最有用的是那个形状</span>。',
- '八个数字里，你不用记具体分，只要看哪两个凸出来、哪两个凹进去。'
- '凸出来的是你不费劲就能做好的事，凹进去的是你做起来特别耗的事。',
- '我自己那张，边缘系统 85 顶得最高，小脑 60 最低。'
- '翻译过来就是：我对情绪信号敏感得过头，但手上的精细活儿一做就烦。'
- '这解释了我为什么写东西可以写一天，装个家具能装到砸手。',
+shot('06-jiaocheng-3.html', '报告怎么读 · 02',
+     '第一步：把<span class="em">最高和最低</span>那两个角找出来',
+     'assets/radar-zoom.jpg', '灵伴 AI · 天赋脑图', '八个维度 · 只用记两个', portrait=False,
+     note='我这张最高是边缘系统 85，最低是小脑 60，差 <span class="em">25 分</span>。'
+          '差得越多，这两件事在你身上的省力和费力就越明显。')
+
+body('06-jiaocheng-4.html', '报告怎么读 · 03', [
+ '第二步：把这两个名字翻成人话。八个脑区听着像医学名词，'
+ '对应的其实都是<span class="em">日常行为</span>——',
+ '<span class="em">前额叶</span>　做计划、忍住不做某事<br/>'
+ '<span class="em">颞叶</span>　　听人说话、记人记事<br/>'
+ '<span class="em">顶叶</span>　　方向感、身体的空间协调<br/>'
+ '<span class="em">枕叶</span>　　对画面和视觉信息敏感<br/>'
+ '<span class="em">边缘系统</span>　对情绪和气氛敏感<br/>'
+ '<span class="em">运动皮层</span>　动手、把事真做出来<br/>'
+ '<span class="em">小脑</span>　　手上的精细活<br/>'
+ '<span class="em">基底神经节</span>　养习惯、扛重复',
+])
+
+body('06-jiaocheng-5.html', '报告怎么读 · 04', [
+ '第三步：把这两句连起来读。我那张最高是边缘系统、最低是小脑，'
+ '翻译过来就是——对气氛和情绪敏感得过头，但手上的精细活一做就烦。',
+ '这解释了我为什么能坐着写一天字，装个柜子能装到砸手。'
+ '<span class="em">不是不认真，是那件事在我这儿本来就更费。</span>',
+ '<span class="last">你那张最高最低是哪两个，基本就是你最省力和最费力的两件事。'
+ '知道这个，比知道分数有用得多。</span>',
 ])
 
 
@@ -320,26 +359,50 @@ body('07-dashang-2.html', '灵体大赏 · 01', [
 
 
 # ════════════════════════════════════════════════════════════════
-# 08 · 节令热点（三伏 → 命理体检 health-wuyun）
+# 08 · 节令热点（三伏 → 命理体检 health-wuyun）—— 完整 5 张
+#     ⚠️ 上一版是废稿：封面问「最先扛不住的地方」，三张读完从没回答是哪儿；
+#        配图是「五运六气」界面条，读者不知道那是什么，也没一句话解释。
+#        用户：「文字内容很差劲，完全不知道在讲什么」。
+#     这一版按 tuwen-seasonal 的 A+B 混合走：节气文化桥 + 实用清单收尾，
+#     并且**把答案说出来**（长夏对应脾），产品截图正好证明它（脾 45 是最低角）。
 # ════════════════════════════════════════════════════════════════
 cover('08-jieling-1.html', '灵伴 AI · 节气手记',
-      '入伏这几天，<br/>身体最先<br/><span class="em">扛不住的地方</span>',
-      'assets/wuyun-liuqi.jpg', illo_h=400, fit='contain', bg='#2a2624')
+      '一入伏就没胃口、<br/>吃完就困，<br/><span class="em">不是你懒</span>',
+      'assets/wuyun-radar.jpg', illo_h=520, fit='contain', card=True)
 
-shot('08-jieling-2.html', '节气手记 · 01',
-     '五脏各有各的<span class="em">负载曲线</span>',
-     'assets/wuyun-cards.jpg', '灵伴 AI · 五脏读数', '木肝 · 火心 · 土脾 · 金肺 · 水肾', portrait=False,
-     note='左边这张标的是位置，右边那个五边形标的是<span class="em">负载</span>——'
-          '哪一角鼓出来就是这段时间使力最多的地方，凹下去的是撑不上劲的。'
-          '入伏这几天，多数人凹的是同一个角。')
+body('08-jieling-2.html', '节气手记 · 01', [
+ '入伏这几天，很多人会同时出现这几样：早上起不来，中午吃两口就饱，'
+ '下午三四点整个人是沉的，晚上又睡不踏实。',
+ '这不是意志力的问题。三伏是一年里最特殊的一段——'
+ '<span class="em">外面最热，人身上的热却都浮在体表，里头反而是空的</span>。',
+ '古人干脆把这段从夏天里单拎出来，另给了个名字叫「长夏」。'
+ '单独命名，就是因为它跟前面两个月的规律不一样。',
+])
 
 body('08-jieling-3.html', '节气手记 · 02', [
- '古人把一年切成二十四段，不是为了好看，是因为<span class="em">身体在每一段里的负载不一样</span>。'
- '三伏这段最典型：外面热，里面反而是空的。',
- '一套一千年前的季节-体质对应表，把这件事记得很细：'
- '哪一段该多睡，哪一段不该吃凉的，哪一段情绪容易起火。'
- '我们把它做成了一份体检式的读数，每个人的图都不一样。',
- '你不用信它，就当是一份提醒：<span class="last">这几天你觉得累，可能真的不是你懒。</span>',
+ '长夏在这套模型里对应的脏是<span class="em">脾</span>。'
+ '脾管的是把吃进去的东西转成能用的力气。',
+ '湿气一重它就转不动，于是第一反应就是不想吃、吃完困、身上发沉——'
+ '正好是上面那几样。',
+ '所以「最先扛不住的地方」不是硬套出来的，'
+ '是长夏配土、土配脾这条对应关系直接推下来的。',
 ])
+
+shot('08-jieling-4.html', '节气手记 · 03',
+     '我这张，最低的一角<span class="em">正好是脾</span>',
+     'assets/wuyun-body.jpg', '灵伴 AI · 五脏读数', '肝 85 · 心 70 · 肾 60 · 肺 50 · 脾 45', portrait=False,
+     note='五个数字标的是这段时间各脏的负载，越低越吃力。'
+          '我这张肝 85 最高、<span class="em">脾 45 最低</span>。'
+          '你那张最低的是哪一角，值得点开看一眼——每个人不一样。')
+
+body('08-jieling-5.html', '节气手记 · 04', [
+ '知道是脾在硬撑，这几天该怎么过就清楚了。',
+ '<span class="em">少碰冰的</span>——热在体表、里头本来就是凉的，一杯冰饮下去，最先受不了的就是它。<br/>'
+ '<span class="em">把午觉睡回来</span>——长夏最耗的是白天那段，补在中午比熬到晚上有用。<br/>'
+ '<span class="em">出微汗就行</span>——出汗是散湿的，但汗出大了力气也跟着走。',
+ '<span class="last">都是常识，只是这几天格外要紧。'
+ '你觉得累，真的不是你懒——是这段时间它本来就难。</span>',
+])
+
 
 print('生成了 8 个 demo 共', len([f for f in os.listdir(HERE) if f.endswith('.html')]), '张 slide')
