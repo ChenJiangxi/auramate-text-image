@@ -79,6 +79,8 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 3. 写文案   references/03-copywriting.md。先写完整文案，再想图
 4. 找素材   references/04-assets.md。优先级：已有高清截图 > 录屏扒帧 > 让用户发 > codex 生插画
 5. 出图     templates/ 挑模板 → 写 slide-N.html → node render.js
+            ⚠️ 素材本来是动的（灵体形态 / 产品动效）→ 出 GIF 不出静帧，
+               用 tools/slide-gif.js。静帧是 fallback，不是默认
 6. 自查     tools/redline-scan.sh + references/01-redline.md 的 checklist 逐条过
 7. 交付     references/06-publish.md 的发布包格式，写进 content.md，发给用户过审
 ```

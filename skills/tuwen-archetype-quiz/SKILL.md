@@ -36,20 +36,53 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ## 视觉
 
 - 模板 B 浅底卡片风（`templates/card-light/`），一张一个观点，对比强
-- 尺寸 1080×1440 或 1242×1660 都行，**全篇统一**
+- 尺寸 1242×1660 出图，GIF 输出按工具的降档结果（通常落在 960px 宽），**全篇统一**
 - **每张的灵体必须是真截图**（`~/HermitAgents/auramate-shared/lingti-orbs/` 或 `shishen-mov/` 抽帧）
 - 排版跨 slide 完全一致，只换名字和句子 —— 用一个 `_form-template.html` + 脚本批量生成
 
-### 动图（可选，效果好）
+### ⚠️ 形态图鉴要出 **GIF**，不是静帧
 
-post-004 用了 11 张 4 秒循环 GIF（光球在动），文案里写「每张图都是实况，长按能看灵体在动」。
+**这类内容的默认交付是动图。** 十种形态本来就是粒子在运动 —— 扒成静帧，等于把内容里
+最有意思的那部分丢掉。小红书图文支持 GIF，长按会播。post-004 就是发的 11 张 4 秒循环 GIF，
+正文里写「每张图都是实况，长按能看灵体在动」。
 
+**静图只是 fallback**（素材只有截图、或者动图怎么压都超预算时才退回去）。
+
+#### 做法
+
+素材：`~/HermitAgents/auramate-shared/shishen-mov/<形态id>-day.mov`，一形态一段，714×702 60fps。
+
+1. 模板里给要动的容器加 `id="slot"`（`templates/card-light/body.html` 已经有了）
+2. 跑工具：
 ```bash
-# mov → gif：480×480, 10fps, 256 色 palettegen + bayer dither
-# 单张控制在 5.5MB 内，全篇 < 50MB（小红书上限 200MB）
+node tools/slide-gif.js <slide.html> <形态.mov> <out.gif> [秒数=4]
+```
+它会 Playwright 渲染底图 + 读出 slot 的位置和圆角 → PIL 生成圆角蒙版 → ffmpeg 把录屏
+scale/crop 进槽位叠上去 → palettegen 出 GIF。**只有槽位在动，文字和边框逐帧完全静止。**
+
+#### 体积（这类最容易翻车的地方）
+
+单张 ≤ **5.5MB**，全篇 < 50MB（小红书上限 200MB，但太大加载慢、掉完播）。
+
+**动图面积越大越吃体积。** 图鉴的光球是满屏的，1080 宽 / 4s / 10fps 能到 **11MB**。
+工具自带降档梯子，会自动往下退并打印退到了哪一档：
+
+```
+4s/10fps/192色/1080px → 11.5MB 超预算，降一档
+4s/8fps/160色/1000px  → 7.9MB 超预算，降一档
+03-tujian-2.gif  5.3 MB  3s @ 8fps · 128 色 · 960px 宽
 ```
 
-静图底 ⊕ mov 源合成，槽位坐标写死在脚本里（post-004：封面槽 (240,351) 600×600，form 槽 (300,264) 480×480）。
+梯子走到底还超，工具会明说 —— 那就得**把 slot 做小**，或者这张退回静图。别硬发一个 20MB 的。
+
+环境变量：`GIF_MAX_MB` 改预算，`GIF_WIDTH` 强制输出宽度（只在做缩略图时用）。
+
+#### 踩过的坑（都已修在工具里）
+
+- `fps` 和 `scale` 必须放在 `overlay` **之后**。放前面输出会跟着底图的 25fps 走，帧数翻 2.5 倍 → 18MB。
+- `force_original_aspect_ratio=increase` 缩放有取整误差，跟蒙版差 1px 就 `alphamerge` 报错退出。
+  槽位宽高取偶数 + 末尾再 `scale` 一次兜底。
+- 圆角常挂在里面的 `img` 上而不是容器上，蒙版要往下找一层读，不然叠上去四角是方的。
 
 ## ⚠️ 互动怎么做（这里最容易踩线）
 

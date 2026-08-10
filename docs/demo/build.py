@@ -5,6 +5,12 @@
 每个 demo 的文案都按对应子 skill 的规则写，不是占位符。
 
     /usr/bin/python3 build.py && node render.js
+
+03 图鉴那两张形态页交付的是 GIF 不是静帧（形态本来就是动的）：
+    M=~/HermitAgents/auramate-shared/shishen-mov
+    node ../../tools/slide-gif.js 03-tujian-2.html $M/dunwu-day.mov 03-tujian-2.gif 4
+    node ../../tools/slide-gif.js 03-tujian-3.html $M/yali-day.mov  03-tujian-3.gif 4
+仓库里那两张是 README 缩略版（GIF_WIDTH=620 GIF_MAX_MB=2），真交付走默认 1080 起。
 """
 import io, os, re
 
@@ -84,7 +90,7 @@ def card_cover(out, label, head_html, sub, orb):
 
 def card_body(out, kicker, name, state, orb):
     s = CARD_BODY
-    s = s.replace('assets/orb-{{id}}.png', orb)
+    s = s.replace('assets/form-{{id}}.png', orb)
     s = s.replace('{{系列名}} · {{序号}} / {{总数}}', kicker)
     s = s.replace('{{形态名}}', name)
     s = s.replace('{{一句具体状态，不是定义}}', state)

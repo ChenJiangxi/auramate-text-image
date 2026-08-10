@@ -93,6 +93,20 @@ box-shadow:0 22px 54px rgba(60,40,70,0.26);
 
 模板文件 → `templates/editorial-gradient/{cover,body,shot,pair}.html`
 
+### `id="slot"` 约定 —— 要出动图的容器
+
+**素材本来是动的就别出静帧。** 灵体形态、产品动效这类，静帧丢掉了内容里最有意思的部分。
+小红书图文支持 GIF，长按会播。
+
+给要动的那个容器加 `id="slot"`，然后：
+
+```bash
+node tools/slide-gif.js <slide.html> <录屏.mov> <out.gif> [秒数=4]
+```
+
+工具会读出 slot 的位置和圆角、生成圆角蒙版、把录屏合成进去，**只有槽位在动**。
+体积超预算会自动降档并打印退到了哪一档。完整说明见 `tuwen-archetype-quiz`。
+
 ---
 
 ## 模板 B · 浅底卡片结构风

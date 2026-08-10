@@ -57,10 +57,20 @@ skill：`tuwen-knowledge-decode`
 
 互动率和涨粉最高的一类。成败只看一件事：**读者有没有想说「我是 X」的冲动。**
 
-| 封面 | 形态 06 | 形态 08 |
+| 封面 | 形态 06（GIF） | 形态 08（GIF） |
 |---|---|---|
-| <img src="docs/demo/03-tujian-1.jpg" width="240"> | <img src="docs/demo/03-tujian-2.jpg" width="240"> | <img src="docs/demo/03-tujian-3.jpg" width="240"> |
+| <img src="docs/demo/03-tujian-1.jpg" width="240"> | <img src="docs/demo/03-tujian-2.gif" width="240"> | <img src="docs/demo/03-tujian-3.gif" width="240"> |
 
+> **这类的默认交付是 GIF 不是静帧。** 十种形态本来就是粒子在运动，扒成静帧等于把内容里最
+> 有意思的部分丢掉。小红书图文支持 GIF，长按会播 —— post-004 就是发的 11 张 4 秒循环。
+>
+> ```bash
+> node tools/slide-gif.js <slide.html> <形态.mov> <out.gif> 4
+> ```
+> 模板里给要动的容器加 `id="slot"`，工具读出它的位置和圆角、生成圆角蒙版、把录屏合成进去。
+> **只有槽位在动，文字和边框逐帧完全静止。** 体积超预算自动降档并打印退到哪一档：
+> `11.5MB → 7.9MB → 5.3MB（3s @ 8fps · 128 色 · 960px）`。
+>
 > 形态名要有画面感 —— 「发疯日」「捡漏日」赢「伤官型」「偏财型」一万倍。
 > ⚠️ 互动只能写**开放式陈述**（「你今天是哪一种」），**不能写**「评论区扣 1」「第一个留言送解读」—— 那是引导评论 redline。
 
@@ -232,6 +242,7 @@ templates/
 tools/
   redline-scan.sh            违禁词扫描 · 发布前必跑
   new-post.sh                起一个新 post 目录
+  slide-gif.js               slide + 录屏 → GIF（动图内容用，自动降档控体积）
 docs/demo/                   上面所有 demo 的源 + 图 + build.py
 examples/
   post-digu-kline/           一篇真实已发稿的六步拆解（WALKTHROUGH.md）
@@ -247,6 +258,7 @@ examples/
 | 中文字体 | Google Fonts（联网 `@import`） | 断网会 fallback 到 PingFang SC，渲完肉眼看一眼 |
 | 裁图 | `/usr/bin/python3` + PIL | 用 macOS 原生 `sips` 代替 |
 | AI 插画 | `codex` CLI（ChatGPT OAuth） | 配图改用真实产品截图 |
+| 动图 slide | `ffmpeg` | 出不了 GIF，形态类内容只能退回静帧 |
 
 ⚠️ 本机默认 `python3`（Homebrew 3.14）**是坏的** —— 没有 Pillow，`pyexpat` 符号对不上，`pip3 install` 也会崩。裁图一律用 `/usr/bin/python3` 或 `sips`。
 

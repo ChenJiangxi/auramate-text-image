@@ -13,7 +13,10 @@ html,body{width:1242px;height:1660px;background:#eee9f5;font-family:'Noto Sans S
 .name .em{color:#7a55a6;}
 .state{font-size:46px;font-weight:700;color:#5f5570;line-height:1.5;margin-top:24px;}
 /* 灵体要铺满，别缩成一小块留大白。
-   素材是整张手机截图时先裁出光球方块（见 references/04-assets.md）。 */
+   素材是整张手机截图时先裁出光球方块（见 references/04-assets.md）。
+
+   id="slot" 是给 tools/slide-gif.js 用的锚点：形态本来就是动的，
+   图鉴自测这类内容应该出 GIF 而不是静帧。静帧只是 GIF 的 fallback。 */
 .orbwrap{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin-top:28px;}
 .orbwrap img{height:100%;width:100%;object-fit:cover;display:block;border-radius:24px;
   box-shadow:0 18px 44px rgba(72,48,92,0.22);}
@@ -23,6 +26,6 @@ html,body{width:1242px;height:1660px;background:#eee9f5;font-family:'Noto Sans S
 <div class="kicker">{{系列名}} · {{序号}} / {{总数}}</div>
 <div class="name">{{形态名}}</div>
 <div class="state">{{一句具体状态，不是定义}}</div>
-<div class="orbwrap"><img src="assets/orb-{{id}}.png"/></div>
+<div class="orbwrap" id="slot"><img src="assets/form-{{id}}.png"/></div>
 <div class="foot"><span>灵伴 AI · AURAMATE</span><span>auramate.net</span></div>
 </div></body></html>
