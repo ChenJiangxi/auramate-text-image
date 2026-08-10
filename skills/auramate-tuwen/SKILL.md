@@ -9,7 +9,7 @@ description: |
   触发词：小红书图文 / XHS / 灵伴 / AuraMate / 图文帖 / slide / 选题 / 发小红书 / 出一套图。
   子 skill：tuwen-narrative-essay · tuwen-knowledge-decode · tuwen-archetype-quiz ·
   tuwen-feature-launch · tuwen-proof-benchmark · tuwen-campaign-contest ·
-  tuwen-daily-sign · tuwen-seasonal。
+  tuwen-daily-sign · tuwen-seasonal · tuwen-manifesto。
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
@@ -68,6 +68,7 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 | **活动比赛** | 灵体大赏 · UGC 征集 · 送月度会员 | `tuwen-campaign-contest` | 2–4 |
 | **日签日更** | 每日灵签，低成本养号 | `tuwen-daily-sign` | 1–4 |
 | **节令热点** | 节气 / 新年 / 开工 / 生日月 | `tuwen-seasonal` | 4–8 |
+| **创作理念** | 讲我们怎么理解这套东西 / 不做什么。立场抄不走 | `tuwen-manifesto` | 4–6 |
 
 **张数按内容类型走，别形成习惯。** 小红书图文上限 18 张，实际最优值每类不一样：
 图鉴自测一种一张必须 8–12，抽奖 2–4 张（长了像广告），叙事随笔压不到 3 张（痛点 →

@@ -23,6 +23,15 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
 .shotwrap{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin-top:34px;}
 .shot{height:100%;border-radius:26px;overflow:hidden;border:1px solid rgba(90,70,95,0.26);box-shadow:0 22px 54px rgba(60,40,70,0.26);}
 .shot img{height:100%;display:block;}
+/* CSS 标注：教程类要指「看这里」时，别去裁一个放大图 ——
+   裁不好就是把主体切一半（踩过）。在完整截图上叠标记，图完整、指向也清楚。
+   .mark 用百分比定位，换图只需重调百分比。 */
+.shot{position:relative;}
+.mark{position:absolute;transform:translate(-50%,-50%);font-family:'Noto Sans SC','PingFang SC',sans-serif;
+  font-size:26px;font-weight:700;letter-spacing:0.06em;color:#fff;padding:10px 20px;border-radius:999px;
+  white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,0.45);}
+.mark.hi{background:#c2472f;}
+.mark.lo{background:#3d6fa8;}
 /* 横构图截图放进竖版 slide，图和 foot 之间必然空一块 ——
    用这段解读把它撑满。竖构图截图铺满高度时，把整个 .note 删掉。 */
 .note{font-size:34px;line-height:1.75;color:#4a4348;margin-top:30px;}
