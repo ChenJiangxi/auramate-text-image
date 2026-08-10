@@ -5,7 +5,11 @@
 #   tools/redline-scan.sh content.md slide-1.html
 #
 # 命中即 exit 1 并打印词 + 文件 + 行号。
-# 注意：扫不到图片里的字。图内文字靠人眼 + 01-redline.md 的 checklist。
+# 注意：
+#   1. 扫不到图片里的字 —— 图内文字靠人眼 + 01-redline.md 的 checklist。
+#   2. 只扫**待发内容**（posts/ 和 docs/demo/）。别扫 skills/ ——
+#      红线词表本身写在那些文档里，必然全红，是设计如此的误报。
+#   3. HTML 注释里的词也会被扫到（不渲染，属误报）。看清楚命中的是不是正文。
 
 set -uo pipefail
 

@@ -173,6 +173,8 @@ tools/redline-scan.sh docs/demo/       # 命中即 exit 1
 
 图片里的字扫不到，那部分靠 `01-redline.md` 的人工 checklist。
 
+⚠️ 只扫**待发内容**（`posts/` `docs/demo/`）。别扫 `skills/` —— 红线词表本身就写在那些文档里，必然全红。
+
 ---
 
 # 快速开始
