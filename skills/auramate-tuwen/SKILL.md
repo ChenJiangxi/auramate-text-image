@@ -85,6 +85,8 @@ reframe → 产品 ×2 → 落点少一步都断）。定张数之前先看子 s
 1. 定角度   钩子 → 桥到哪个产品功能。功能清单在 references/00-brand.md
 2. 定类型   查上面路由表 → 读对应子 skill
 3. 写文案   references/03-copywriting.md。先写完整文案，再想图
+            两个硬指标：正文页 280-340 字（第五节）+ 每个断言后面有「为什么」（第六节）
+            含金量来自推导链，不是观点数量
 4. 找素材   references/04-assets.md。优先级：已有高清截图 > 录屏扒帧 > 让用户发 > codex 生插画
 5. 出图     templates/ 挑模板 → 写 slide-N.html → node render.js
             ⚠️ 素材本来是动的（灵体形态 / 产品动效）→ 出 GIF 不出静帧，
