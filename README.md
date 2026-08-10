@@ -342,37 +342,6 @@ tools/redline-scan.sh posts/post-digu-kline/        # 违禁词扫描
 
 ---
 
-# 仓库结构
-
-```
-skills/
-  auramate-tuwen/            主 skill · 总入口 · 铁律 · 路由表
-    references/
-      00-brand.md            品牌 / 受众 / 22 个玩法功能表（含真实 id）
-      01-redline.md          违禁词 / 安全替换表 / 发布前 checklist
-      02-visual-system.md    三套模板的完整色值字号页型
-      03-copywriting.md      人味儿写作 / 标题公式 / 钩子→功能桥接法
-      04-assets.md           素材在哪、取图优先级、benchmark 数据诚实红线
-      05-toolchain.md        渲染 / codex 生图 / 裁图 / 本机踩过的坑
-      06-publish.md          发布包格式 / 评论区 / 数据回收
-      07-content-matrix.md   内容矩阵 / 配比 / 选题库 / 十神对照表
-  tuwen-*/                   8 个子 skill，见上面每一节
-templates/
-  editorial-gradient/        ★ 主力模板 · cover / body / shot 三种页型
-  card-light/                卡片风（图鉴自测）· cover / body
-  screenshot-caption/        深色压字风（单张冲击封面）
-  render.js                  HTML → 1242×1660 PNG（Playwright）
-tools/
-  redline-scan.sh            违禁词扫描 · 发布前必跑
-  new-post.sh                起一个新 post 目录
-  slide-gif.js               slide + 录屏 → GIF（动图内容用，自动降档控体积）
-docs/demo/                   上面所有 demo 的源 + 图 + build.py
-examples/
-  post-digu-kline/           一篇真实已发稿的六步拆解（WALKTHROUGH.md）
-```
-
----
-
 # 依赖
 
 | 用途 | 依赖 | 没有的话 |
@@ -384,40 +353,3 @@ examples/
 | 动图 slide | `ffmpeg` | 出不了 GIF，形态类内容只能退回静帧 |
 
 ⚠️ 本机默认 `python3`（Homebrew 3.14）**是坏的** —— 没有 Pillow，`pyexpat` 符号对不上，`pip3 install` 也会崩。裁图一律用 `/usr/bin/python3` 或 `sips`。
-
----
-
-# 封面改版记录（2026-08-10）
-
-**标题是封面主角，插图是配角。**
-
-| 最初 | 现在 |
-|---|---|
-| <img src="docs/demo/cover-before.jpg" width="280"> | <img src="docs/demo/01-reframe-1.jpg" width="280"> |
-
-1. **标题 68 → 132px**，`flex:1` 垂直居中占上半。字号按每行字数选：≤6 字 150 / 7–8 字 132 / 9–10 字 106 —— 超了会自动折行，把手动 `<br/>` 断行冲掉（148px 配 8 字实测就爆）。
-2. **插图退成底部 400px（画面 24%）横带**，出血到左右边缘。最初 `max-width:540px` 只占一半宽度，两侧和上方全是大白，犯了自己定的「不留白」；中间还矫枉过正把图铺满过一次，图喧宾夺主。两版都写进 `02-visual-system.md` 当反面教材。
-3. **`object-position:center 76%`** —— 竖构图插画裁成横带会切掉主体，这个值把背影拉回画面。换插图要重调。
-4. **渐变加深 + 两角柔光 + 纸感颗粒**，accent 紫 `#7a5a8a` → `#6b3f8f`。
-
----
-
-# 维护约定
-
-## ⚠️ 这个仓库是多人在改 —— 动手前先 pull
-
-陈江西本人也直接往这里提交（例：`069f929` 加了「保留情绪钩子」「标题主语要在画面里」几条规则）。
-
-```bash
-git pull --rebase origin main     # 开工第一件事，不是推之前才想起来
-```
-
-**先 pull 再改**，别等 push 被拒了再 fetch/rebase —— 那时候你可能已经在一份过时的
-skill 上写了半天，或者把别人刚加的规则又改回去了。
-
-冲突时的原则：**在对方的新内容之上合并**，不 force。两边规则大概率是互补的，
-真打架就说清楚哪条留哪条为什么。
-
-- 每次被用户拒稿 / 平台限流，**当天**把结论写进对应的 reference，注明日期和原话。
-- 模板改了要同步跑 `docs/demo/build.py` 重出 demo，别只在某一篇 post 里改。
-- 新增内容类型 → 新开一个 `tuwen-*` 子 skill，别往主 skill 里堆。

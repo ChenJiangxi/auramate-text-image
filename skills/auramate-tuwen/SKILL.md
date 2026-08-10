@@ -110,6 +110,39 @@ posts/post-{slug}/
 
 **不留冗余。** `-v1` `-v2` `-base` 中间产物在终版出来后立刻删 —— 用户原话「不要有冗余，我很讨厌文件有冗余」。
 
+## 仓库怎么找东西
+
+```
+skills/auramate-tuwen/references/   本文下面那张索引表
+skills/tuwen-*/                     9 个子 skill，见上面路由表
+templates/editorial-gradient/       主力模板 · cover / body / shot / pair 四种页型
+templates/card-light/               卡片风（图鉴自测）
+templates/screenshot-caption/       深色压字风（单张冲击封面）
+templates/render.js                 HTML → 1242×1660 PNG
+tools/redline-scan.sh               违禁词扫描 · 发布前必跑
+tools/new-post.sh                   起一个新 post 目录
+tools/slide-gif.js                  slide + 录屏 → GIF（动图内容用，自动降档控体积）
+docs/demo/                          九类内容各一套跑通的 demo + build.py，改模板后重跑它
+examples/post-digu-kline/           一篇真实已发稿的六步拆解
+```
+
+## 维护约定
+
+**⚠️ 这个仓库是多人在改 —— 动手前先 pull。** 陈江西本人也直接往这里提交
+（例：`069f929` 加了「保留情绪钩子」「标题主语要在画面里」几条规则）。
+
+```bash
+git pull --rebase origin main     # 开工第一件事，不是推之前才想起来
+```
+
+别等 push 被拒了再 fetch/rebase —— 那时候你可能已经在一份过时的 skill 上写了半天，
+或者把别人刚加的规则又改回去了。冲突时**在对方的新内容之上合并，不 force**；
+两边规则大概率互补，真打架就说清楚哪条留哪条为什么。
+
+- 被用户拒稿 / 平台限流，**当天**把结论写进对应的 reference，注明日期和原话。
+- 改了模板要重跑 `docs/demo/build.py` 出 demo —— demo 会被当范本，**范本的形状本身就是规则**。
+- 新增内容类型 → 新开一个 `tuwen-*` 子 skill，别往主 skill 里堆。
+
 ## reference 索引
 
 | 文件 | 什么时候读 |
