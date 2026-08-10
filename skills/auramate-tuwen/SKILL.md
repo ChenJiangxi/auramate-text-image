@@ -89,7 +89,10 @@ reframe → 产品 ×2 → 落点少一步都断）。定张数之前先看子 s
 5. 出图     templates/ 挑模板 → 写 slide-N.html → node render.js
             ⚠️ 素材本来是动的（灵体形态 / 产品动效）→ 出 GIF 不出静帧，
                用 tools/slide-gif.js。静帧是 fallback，不是默认
-6. 自查     tools/redline-scan.sh + references/01-redline.md 的 checklist 逐条过
+6. 自查     两个脚本都要跑，别靠眼睛：
+              tools/redline-scan.sh  违禁词（命中即 exit 1）
+              tools/check-fill.js    留白（正文页 280-340 字，少了底下必空）
+            再过 references/01-redline.md 的人工 checklist
 7. 交付     references/06-publish.md 的发布包格式，写进 content.md，发给用户过审
 ```
 
@@ -122,6 +125,7 @@ templates/render.js                 HTML → 1242×1660 PNG
 tools/redline-scan.sh               违禁词扫描 · 发布前必跑
 tools/new-post.sh                   起一个新 post 目录
 tools/slide-gif.js                  slide + 录屏 → GIF（动图内容用，自动降档控体积）
+tools/check-fill.js                 量正文页留白 —— 这条规则我反复违反，只能靠脚本
 docs/demo/                          九类内容各一套跑通的 demo + build.py，改模板后重跑它
 examples/post-digu-kline/           一篇真实已发稿的六步拆解
 ```
