@@ -103,8 +103,17 @@ m.save('${mask}')
     `[b][p]paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle`,
   ].join(';');
 
+  // GIF_WIDTH 强制宽度时，靠缩宽降档的那几档会退化成完全相同的参数 ——
+  // 去重，别白跑两遍 ffmpeg。
+  const seen = new Set();
+  const ladder = LADDER.filter(st => {
+    const key = `${st.secs}/${st.fps}/${st.colors}/${FORCE_W || st.w}`;
+    if (seen.has(key)) return false;
+    seen.add(key); return true;
+  });
+
   let mb = 0, used = null;
-  for (const step of LADDER) {
+  for (const step of ladder) {
     execFileSync('ffmpeg', [
       '-loop', '1', '-t', String(step.secs), '-i', base,
       '-stream_loop', '-1', '-t', String(step.secs), '-i', path.resolve(srcVideo),

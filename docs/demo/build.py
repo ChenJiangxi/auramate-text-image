@@ -68,8 +68,8 @@ def pair(out, kicker, head_html, left, right, foot_l, foot_r):
     s = PAIR
     s = s.replace('{{系列名}} · {{期号}}', kicker)
     s = s.replace('{{这一对讲的是什么}}，<span class="em">{{分成两种}}</span>', head_html)
-    s = s.replace('assets/form-{{左}}.png', 'assets/form-%s.png' % left[0])
-    s = s.replace('assets/form-{{右}}.png', 'assets/form-%s.png' % right[0])
+    s = s.replace('assets/form-{{左}}.jpg', 'assets/form-%s.jpg' % left[0])
+    s = s.replace('assets/form-{{右}}.jpg', 'assets/form-%s.jpg' % right[0])
     s = s.replace('{{左形态名}}', left[1]).replace('{{右形态名}}', right[1])
     s = s.replace('<span class="tag">稳</span>', '<span class="tag">%s</span>' % left[2], 1)
     s = s.replace('<span class="tag">野</span>', '<span class="tag">%s</span>' % right[2], 1)
@@ -90,7 +90,7 @@ def card_cover(out, label, head_html, sub, orb):
 
 def card_body(out, kicker, name, state, orb):
     s = CARD_BODY
-    s = s.replace('assets/form-{{id}}.png', orb)
+    s = s.replace('assets/form-{{id}}.jpg', orb)
     s = s.replace('{{系列名}} · {{序号}} / {{总数}}', kicker)
     s = s.replace('{{形态名}}', name)
     s = s.replace('{{一句具体状态，不是定义}}', state)
@@ -119,9 +119,31 @@ body('01-reframe-2.html', '低谷期 · 01', [
  '一件坏事，他能翻来覆去地嚼很久，嚼到最后，结论永远是那一个：怪我。慢慢地，什么锅都成了他的。',
 ])
 
-shot('01-reframe-3.html', '低谷期 · 03',
+body('01-reframe-3.html', '低谷期 · 02', [
+ '后来我慢慢想明白：他不是不会反省，是反省的时候，手里没有一把<span class="em">尺子</span>。'
+ '没有尺子，他就量不出来——眼前这件坏事，几分是我的问题，几分是这段日子本来就难。',
+ '少了这把尺子，剩下的就只能全算到自己头上。'
+ '所以我做了个东西，叫人生 K 线：拿你的出生时间数据，把这一辈子的起落，画成一条有涨有跌的线。',
+ '哪几年往上走，哪几年本来就低，清清楚楚摆在你面前。'
+ '它不替你开脱什么，只是让你看见——你现在正踩着的这个坑，在整条线里，是有它的位置的。',
+])
+
+shot('01-reframe-4.html', '低谷期 · 03',
      '你这一辈子，<span class="em">本来就有涨有跌</span>',
      'assets/pf-chart.png', '灵伴 AI · 人生 K 线', '红涨吉 · 绿跌凶')
+
+shot('01-reframe-5.html', '低谷期 · 04',
+     '点开那一年，<span class="em">它把起落讲给你听</span>',
+     'assets/pf-detail.png', '灵伴 AI · 人生 K 线', '开盘 · 收盘 · 最高 · 最低')
+
+body('01-reframe-6.html', '低谷期 · 05', [
+ '向内求，本来是件好事。可一旦过了头，就成了没完没了的自我审判——'
+ '把系统的、时运的、别人的问题，一股脑收进自己身上，判自己有罪。',
+ '这套东西给你的，从来不是一张免罪符，让你把责任推给命。它给的是一个<span class="em">坐标</span>：'
+ '让你在最难、最想骂自己的那一刻，抬头看一眼——哦，我这会儿正站在低处，这段本来就难，它会过去。',
+ '<span class="last">低谷这东西，说到底不是你坏了，是你正走在一段低的运里。'
+ '这条线迟早会拐头往上。你要做的，只是别在最难的时候，还亲手判自己有罪。</span>',
+])
 
 
 # ════════════════════════════════════════════════════════════════
@@ -133,7 +155,7 @@ shot('01-reframe-3.html', '低谷期 · 03',
 # ════════════════════════════════════════════════════════════════
 cover('02-shishen-1.html', '灵伴 AI · 古人的十种状态 · 01',
       '古人形容状态，<br/>分成五对，<br/>每对都有个<span class="em">失控版</span>',
-      'assets/forms-strip.png', illo_h=420, pos='center 50%')
+      'assets/forms-strip.jpg', illo_h=420, pos='center 50%')
 
 body('02-shishen-2.html', '古人的十种状态 · 01', [
  '我们现在形容状态，词很少：忙、累、还行、emo。'
@@ -153,18 +175,35 @@ pair('02-shishen-3.html', '古人的十种状态', '同样是<span class="em">�
 
 
 # ════════════════════════════════════════════════════════════════
-# 03 · 图鉴自测（对号入座）—— 卡片风，一张一个形态
+# 03 · 图鉴自测（对号入座）—— 完整 12 张
+#     ⚠️ 这类不是 3 张能讲完的。类型数 8-12，一种一张，少了不够挑。
+#     顺序按五对排（并肩/往外给/拿到/管着/托着），扫起来有结构。
+#     真交付是 GIF（形态本来就是动的），静帧只是这里为了仓库体积。
 # ════════════════════════════════════════════════════════════════
-card_cover('03-tujian-1.html', '· 十种状态',
+card_cover('03-tujian-01.html', '· 十种状态',
            '你今天<br/>是<span class="em">哪一种</span>',
-           '十种形态全在下面，对号入座一下。我自己最常出现的是顿悟日。',
-           'assets/form-dunwu.png')
+           '十种形态全在下面，一种一张。我自己最常出现的是顿悟日。',
+           'assets/form-dunwu.jpg')
 
-card_body('03-tujian-2.html', '十种状态 · 06 / 10', '顿悟日',
-          '表面上没动静，脑子里一直在转。<br/>灵感是这天冒出来的。', 'assets/form-dunwu.png')
+FORMS = [
+ ('hezuo',    '合作日', '02', '想找的人都在线，约得上。<br/>这天谈事比一个人闷头干强。'),
+ ('fenxiang', '分享日', '03', '嘴松，钱也松。<br/>想请客、想买单、想把知道的都说出去。'),
+ ('meishi',   '美食日', '04', '慢慢来，做点自己喜欢的事。<br/>力气是往外散的，但散得温和。'),
+ ('fafeng',   '发疯日', '05', '憋不住了，非得说点什么。<br/>同样是往外，这天是炸开的。'),
+ ('gaoqian',  '搞钱日', '06', '坐得住，一笔一笔推进度。<br/>拿到的是你自己挣的那份。'),
+ ('jianlou',  '捡漏日', '07', '没打算要，它自己掉下来。<br/>眼疾手快接住的那种。'),
+ ('juanwang', '卷王日', '08', '按节拍走，列表一条条勾掉。<br/>不亢奋，但手感很稳。'),
+ ('yali',     '压力日', '09', '弦是绷着的，但该争的得争。<br/>这天适合把硬话说完。'),
+ ('xuexi',    '学习日', '10', '有人托着你，事情自己顺。<br/>适合学新东西、接别人递过来的。'),
+ ('dunwu',    '顿悟日', '11', '表面上没动静，脑子里一直在转。<br/>灵感是这天冒出来的。'),
+]
+for fid, name, no, state in FORMS:
+    card_body('03-tujian-%s.html' % no, '十种状态 · %s / 10' % no, name, state,
+              'assets/form-%s.jpg' % fid)
 
-card_body('03-tujian-3.html', '十种状态 · 08 / 10', '压力日',
-          '弦是绷着的，但该争的得争。<br/>这天适合把硬话说完。', 'assets/form-yali.png')
+card_body('03-tujian-12.html', '十种状态 · 收尾', '每天换一种',
+          '它读你的出生时间数据，自己判断今天是哪一种。<br/>不用填问卷，也不用选心情。',
+          'assets/forms-strip.jpg')
 
 
 # ════════════════════════════════════════════════════════════════

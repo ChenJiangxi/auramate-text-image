@@ -1,7 +1,10 @@
 <!doctype html><html><head><meta charset=utf-8><style>
-/* 模板 A · 渐变编辑风 —— 正文页  (v2, 2026-08-10)
-   正文统一 44px / lh 1.9。每张写满 2-3 段，别一段一张、别大片留白。
-   .em 深梅紫强调；.en 英文词红棕斜体；.last 收尾段加粗一档。 */
+/* 模板 A · 渐变编辑风 —— 产品截图页  (v2, 2026-08-10)
+   head 52px 说明标题 + 真实产品截图卡 + foot 数据标注。
+   截图必须完整、铺满、干净（无违禁词露出）。
+   portrait 手机图 → .shot{height:100%}（默认）
+   landscape/近方图 → .shot{width:100%;height:auto} + .shot img{width:100%;height:auto}
+   ⚠️ kicker/foot 用第一人称叙述，绝不写「真实产品截图」「产品 demo」。 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',serif;color:#2b2620;overflow:hidden;}
@@ -15,20 +18,16 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
 .frame > *{position:relative;z-index:1;}
 .kicker{font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;font-weight:500;letter-spacing:0.2em;color:#8d7d9e;
   padding-bottom:20px;border-bottom:1px solid rgba(90,70,95,0.16);}
-.body{flex:1;font-size:44px;font-weight:400;line-height:1.9;color:#302c2e;margin-top:46px;}
-.body p{margin-bottom:38px;}
-.body p:last-child{margin-bottom:0;}
-.body .em{color:#6b3f8f;font-weight:500;}
-.body .en{color:#8a5a52;font-style:italic;}
-.body .last{font-weight:500;}
-.foot{padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
+.head{font-size:52px;font-weight:900;line-height:1.34;color:#1a1420;margin-top:30px;}
+.head .em{color:#6b3f8f;}
+.shotwrap{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin-top:34px;}
+.shot{height:100%;border-radius:26px;overflow:hidden;border:1px solid rgba(90,70,95,0.26);box-shadow:0 22px 54px rgba(60,40,70,0.26);}
+.shot img{height:100%;display:block;}
+.foot{margin-top:34px;padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
   font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">
-<div class="kicker">低谷期 · 02</div>
-<div class="body">
-  <p>后来我慢慢想明白：他不是不会反省，是反省的时候，手里没有一把<span class="em">尺子</span>。没有尺子，他就量不出来——眼前这件坏事，几分是我的问题，几分是这段日子本来就难。</p>
-  <p>少了这把尺子，剩下的就只能全算到自己头上。所以我做了个东西，叫人生 K 线：拿你的出生时间数据，把这一辈子的起落，画成一条有涨有跌的线。</p>
-  <p>哪几年往上走，哪几年本来就低，清清楚楚摆在你面前。它不替你开脱什么，只是让你看见——你现在正踩着的这个坑，在整条线里，是有它的位置的。</p>
-</div>
-<div class="foot"><span>灵伴 AI · AURAMATE</span><span>auramate.net</span></div>
+<div class="kicker">低谷期 · 04</div>
+<div class="head">点开那一年，<span class="em">它把起落讲给你听</span></div>
+<div class="shotwrap"><div class="shot"><img src="assets/pf-detail.png"/></div></div>
+<div class="foot"><span>灵伴 AI · 人生 K 线</span><span>开盘 · 收盘 · 最高 · 最低</span></div>
 </div></body></html>
