@@ -10,7 +10,7 @@
    超了会自动折行、把手动断行冲掉（148px 配 8 字就爆了，实测过）。
 
    插图：底部横带 400px（画面 24%），margin:0 -88px 出血到左右边缘、不留圆角。
-   object-position:center 76% —— 竖构图插画裁成横带会切掉下方主体，
+   object-position:center 50% —— 竖构图插画裁成横带会切掉下方主体，
    这个值把背影/主体拉回画面。换插图要重调这个百分比。 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -29,14 +29,14 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
 .titlewrap{flex:1;display:flex;align-items:center;min-height:0;}
 .title{font-size:132px;font-weight:900;line-height:1.28;letter-spacing:-0.02em;color:#1a1420;}
 .title .em{color:#6b3f8f;}
-.illo{height:400px;flex-shrink:0;margin:0 -88px;}
-.illo img{width:100%;height:100%;object-fit:cover;object-position:center 76%;display:block;
+.illo{height:440px;flex-shrink:0;margin:0 -88px;}
+.illo img{width:100%;height:100%;object-fit:cover;object-position:center 50%;display:block;
   box-shadow:0 -8px 28px rgba(72,48,92,0.12);}
 .foot{margin-top:38px;padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
   font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">
-<div class="kicker">灵伴 AI · 命理手记</div>
-<div class="titlewrap"><div class="title">低谷期最大的坑，<br/>是你把自己，<br/>活成了<span class="em">替罪羊</span></div></div>
-<div class="illo"><img src="assets/illustration.png"/></div>
+<div class="kicker">灵伴 AI · 古人的十种状态 · 01</div>
+<div class="titlewrap"><div class="title">古人用十个词，<br/>形容一个人<br/><span class="em">一天的状态</span></div></div>
+<div class="illo"><img src="assets/orb-dunwu.png"/></div>
 <div class="foot"><span>AURAMATE</span><span>auramate.net</span></div>
 </div></body></html>

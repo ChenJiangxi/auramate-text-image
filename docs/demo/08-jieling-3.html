@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset=utf-8><style>
+/* 模板 A · 渐变编辑风 —— 正文页  (v2, 2026-08-10)
+   正文统一 44px / lh 1.9。每张写满 2-3 段，别一段一张、别大片留白。
+   .em 深梅紫强调；.en 英文词红棕斜体；.last 收尾段加粗一档。 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',serif;color:#2b2620;overflow:hidden;}
+.frame{width:100%;height:100%;padding:88px 88px 74px;display:flex;flex-direction:column;position:relative;
+  background:
+    radial-gradient(120% 90% at 10% 2%, rgba(132,98,178,0.20) 0%, rgba(255,255,255,0) 54%),
+    radial-gradient(95% 72% at 98% 102%, rgba(228,152,92,0.18) 0%, rgba(255,255,255,0) 56%),
+    linear-gradient(108deg,#dccfef 0%,#e7d9e9 34%,#f0e2d7 64%,#f8dcc4 100%);}
+.frame::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0.42;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.18'/></svg>");}
+.frame > *{position:relative;z-index:1;}
+.kicker{font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;font-weight:500;letter-spacing:0.2em;color:#8d7d9e;
+  padding-bottom:20px;border-bottom:1px solid rgba(90,70,95,0.16);}
+.body{flex:1;font-size:44px;font-weight:400;line-height:1.9;color:#302c2e;margin-top:46px;}
+.body p{margin-bottom:38px;}
+.body p:last-child{margin-bottom:0;}
+.body .em{color:#6b3f8f;font-weight:500;}
+.body .en{color:#8a5a52;font-style:italic;}
+.body .last{font-weight:500;}
+.foot{padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
+  font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
+</style></head><body><div class="frame">
+<div class="kicker">节气手记 · 02</div>
+<div class="body">
+  <p>古人把一年切成二十四段，不是为了好看，是因为<span class="em">身体在每一段里的负载不一样</span>。三伏这段最典型：外面热，里面反而是空的。</p>
+  <p>一套一千年前的季节-体质对应表，把这件事记得很细：哪一段该多睡，哪一段不该吃凉的，哪一段情绪容易起火。我们把它做成了一份体检式的读数，每个人的图都不一样。</p>
+  <p>你不用信它，就当是一份提醒：<span class="last">这几天你觉得累，可能真的不是你懒。</span></p>
+</div>
+<div class="foot"><span>灵伴 AI · AURAMATE</span><span>auramate.net</span></div>
+</div></body></html>

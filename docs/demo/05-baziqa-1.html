@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset=utf-8><style>
+/* 模板 A · 渐变编辑风 —— 封面页  (v3, 2026-08-10)
+   ★ 标题是主角，插图是配角。标题块 flex:1 占上半，插图是底部一条固定高度的横带。
+     v2 曾把插图 flex:1 铺满，图喧宾夺主 —— 用户原话「标题最重要，配图不能占大头」。
+
+   标题字号按每行字数选（手动 <br/> 断行，别拆词）：
+     每行 ≤6 字   → 150
+     每行 7–8 字  → 132  ← 默认
+     每行 9–10 字 → 106
+   超了会自动折行、把手动断行冲掉（148px 配 8 字就爆了，实测过）。
+
+   插图：底部横带 400px（画面 24%），margin:0 -88px 出血到左右边缘、不留圆角。
+   object-position:center 50% —— 竖构图插画裁成横带会切掉下方主体，
+   这个值把背影/主体拉回画面。换插图要重调这个百分比。 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',serif;color:#2b2620;overflow:hidden;}
+.frame{width:100%;height:100%;padding:88px 88px 74px;display:flex;flex-direction:column;position:relative;
+  background:
+    radial-gradient(120% 90% at 10% 2%, rgba(132,98,178,0.20) 0%, rgba(255,255,255,0) 54%),
+    radial-gradient(95% 72% at 98% 102%, rgba(228,152,92,0.18) 0%, rgba(255,255,255,0) 56%),
+    linear-gradient(108deg,#dccfef 0%,#e7d9e9 34%,#f0e2d7 64%,#f8dcc4 100%);}
+/* 纸感颗粒：让渐变看着是设计过的，不是渲染出来的带状色块 */
+.frame::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0.42;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.18'/></svg>");}
+.frame > *{position:relative;z-index:1;}
+.kicker{font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;font-weight:500;letter-spacing:0.2em;color:#8d7d9e;
+  padding-bottom:20px;border-bottom:1px solid rgba(90,70,95,0.16);}
+.titlewrap{flex:1;display:flex;align-items:center;min-height:0;}
+.title{font-size:132px;font-weight:900;line-height:1.28;letter-spacing:-0.02em;color:#1a1420;}
+.title .em{color:#6b3f8f;}
+.illo{height:440px;flex-shrink:0;margin:0 -88px;}
+.illo img{width:100%;height:100%;object-fit:cover;object-position:center 50%;display:block;
+  box-shadow:0 -8px 28px rgba(72,48,92,0.12);}
+.foot{margin-top:38px;padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
+  font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
+</style></head><body><div class="frame">
+<div class="kicker">灵伴 AI · 我们做了个测试</div>
+<div class="titlewrap"><div class="title">我们拿四届<br/>专家赛真题，<br/>考了<span class="em">五个大模型</span></div></div>
+<div class="illo"><img src="assets/chart.png"/></div>
+<div class="foot"><span>AURAMATE</span><span>auramate.net</span></div>
+</div></body></html>
