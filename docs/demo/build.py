@@ -368,7 +368,7 @@ body('07-dashang-2.html', '灵体大赏 · 01', [
 # ════════════════════════════════════════════════════════════════
 cover('08-jieling-1.html', '灵伴 AI · 节气手记',
       '一入伏就没胃口、<br/>吃完就困，<br/><span class="em">不是你懒</span>',
-      'assets/wuyun-radar.jpg', illo_h=520, fit='contain', card=True)
+      'assets/wuyun-body.jpg', illo_h=520, fit='contain', card=True)
 
 body('08-jieling-2.html', '节气手记 · 01', [
  '入伏这几天，很多人会同时出现这几样：早上起不来，中午吃两口就饱，'
@@ -389,11 +389,11 @@ body('08-jieling-3.html', '节气手记 · 02', [
 ])
 
 shot('08-jieling-4.html', '节气手记 · 03',
-     '我这张，最低的一角<span class="em">正好是脾</span>',
-     'assets/wuyun-body.jpg', '灵伴 AI · 五脏读数', '肝 85 · 心 70 · 肾 60 · 肺 50 · 脾 45', portrait=False,
-     note='五个数字标的是这段时间各脏的负载，越低越吃力。'
-          '我这张肝 85 最高、<span class="em">脾 45 最低</span>。'
-          '你那张最低的是哪一角，值得点开看一眼——每个人不一样。')
+     '换成形状看，<span class="em">凹得最深的那个角</span>',
+     'assets/wuyun-radar.jpg', '灵伴 AI · 五脏读数', '越往里凹越吃力', portrait=False,
+     note='封面那张标的是数字：我这份是肝 85、心 70、肾 60、肺 50、<span class="em">脾 45</span>。'
+          '这个五边形画的是同一组数——最靠里的那一角就是土（脾），入伏这几天最先撑不住的就是它。'
+          '你那张最靠里的是哪一角，值得点开看一眼。')
 
 body('08-jieling-5.html', '节气手记 · 04', [
  '知道是脾在硬撑，这几天该怎么过就清楚了。',
