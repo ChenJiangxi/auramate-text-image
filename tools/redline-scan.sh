@@ -10,6 +10,8 @@
 #   2. 只扫**待发内容**（posts/ 和 docs/demo/）。别扫 skills/ ——
 #      红线词表本身写在那些文档里，必然全红，是设计如此的误报。
 #   3. HTML 注释里的词也会被扫到（不渲染，属误报）。看清楚命中的是不是正文。
+#   4. content.md 的「红线」段会列出你避开了哪些词，扫描器照单命中 —— 同样是误报。
+#      权威的一遍是只扫 slide：redline-scan.sh slide-1.html slide-2.html ...
 
 set -uo pipefail
 

@@ -40,6 +40,16 @@
 标签：{10 个}
 ```
 
+## 扫描 content.md 会误报
+
+`content.md` 的「红线」段通常会写「避开了 X / Y / Z」，扫描器照单命中。
+**权威的一遍是只扫 slide** —— 那才是真要发出去的东西：
+
+```bash
+tools/redline-scan.sh slide-1.html slide-2.html ...   # 真发内容
+node tools/check-fill.js .                            # 留白
+```
+
 ## 交付给用户的方式
 
 陈江西在 dashboard 网页端，**看不到本机路径**。「保存到 X 了」等于什么都没给。
