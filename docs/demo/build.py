@@ -171,11 +171,11 @@ card_body('03-tujian-3.html', '十种状态 · 08 / 10', '压力日',
 # 04 · 功能更新（旺运地图 geo-fortune）
 #     铁律：标题是痛点不是功能名；不许「重磅 / 上新 / 立即体验」
 # ════════════════════════════════════════════════════════════════
-cover('04-gongneng-1.html', '灵伴 AI · 做了点东西',
+cover('04-gongneng-1.html', '灵伴 AI · 新功能 · 旺运地图',
       '在哪个城市，<br/>我会过得<br/><span class="em">松一点</span>',
       'assets/geo-map.png', illo_h=430, pos='center 45%')
 
-body('04-gongneng-2.html', '做了点东西 · 01', [
+body('04-gongneng-2.html', '旺运地图 · 01', [
  '去年有人问我一个问题，我答不上来：我在深圳待了六年，一直觉得很紧，'
  '换个城市会不会好一点？',
  '这个问题很难答，因为它不是「哪个城市更好」，是「哪个城市<span class="em">和你更对得上</span>」。'
@@ -184,7 +184,7 @@ body('04-gongneng-2.html', '做了点东西 · 01', [
  '算出来一张热力图。红的是你舒展的地方，暗的是你使不上劲的地方。',
 ])
 
-shot('04-gongneng-3.html', '做了点东西 · 02',
+shot('04-gongneng-3.html', '旺运地图 · 02',
      '整张地图，<span class="em">每个人的都不一样</span>',
      'assets/geo-map.png', '灵伴 AI · 旺运地图', '越红越舒展', portrait=False)
 
@@ -193,15 +193,15 @@ shot('04-gongneng-3.html', '做了点东西 · 02',
 # 05 · BaziQA 数据集测评（数据背书）
 #     ⚠️ 数据诚实红线：只用竞赛 5 模型口径，不混 live 榜，不臆造 Claude
 # ════════════════════════════════════════════════════════════════
-cover('05-baziqa-1.html', '灵伴 AI · 我们做了个测试',
+cover('05-baziqa-1.html', '灵伴 AI · 模型测评 · 四届专家赛真题',
       '我们拿四届<br/>专家赛真题，<br/>考了<span class="em">五个大模型</span>',
       'assets/chart.png', illo_h=440, pos='center 50%')
 
-shot('05-baziqa-2.html', '我们做了个测试 · 01',
+shot('05-baziqa-2.html', '模型测评 · 01',
      '结果有点意外：<span class="em">通用模型全在下面</span>',
      'assets/chart.png', '灵伴 AI · live benchmark', '2022–2025 四届宏平均', portrait=False)
 
-body('05-baziqa-3.html', '我们做了个测试 · 02', [
+body('05-baziqa-3.html', '模型测评 · 02', [
  '说清楚口径，不然这张图没意义：题目是 2022 到 2025 四届全球专家赛的真题，'
  '盲测，答完再对答案。人类那三根是历届冠亚季军的成绩。',
  '灵伴 <span class="em">37.1%</span>，比在场所有通用大模型都高，但离人类冠军的 44.4% 还差一截。'
@@ -237,11 +237,11 @@ body('06-jiaocheng-3.html', '报告怎么读 · 02', [
 # 07 · 抽奖活动
 #     ⚠️ 必须走平台官方抽奖组件；不许「评论区扣」「私信我」
 # ════════════════════════════════════════════════════════════════
-cover('07-choujiang-1.html', '灵伴 AI · 送几份',
+cover('07-choujiang-1.html', '灵伴 AI · 抽奖 · 30 份深度报告',
       '上个月有人问<br/>这报告长什么样，<br/>不如<span class="em">直接送</span>',
       'assets/pentagon.png', illo_h=430, pos='center 50%')
 
-body('07-choujiang-2.html', '送几份 · 01', [
+body('07-choujiang-2.html', '抽奖 · 01', [
  '与其解释，不如直接给你们看。这次拿出 <span class="em">30 份</span>深度报告，'
  '用平台自带的抽奖功能开，<span class="em">我不经手</span>。',
  '报告里有五脏气机的平衡图、八个维度的天赋分布、还有一份按你出生时间算出来的年度节奏表。'
