@@ -30,6 +30,11 @@ cd posts/post-{slug} && node render.js
 
 skill 在 `~/.claude/skills/codex-image`。前提：`codex login status` = Logged in via ChatGPT；`codex features list | grep image_generation` = stable true。
 
+> ⚠️ **2026-08-10 实测本机 codex 已不可用**：登录状态正常、`image_generation` 也显示 stable，
+> 但实际调用返回 `The 'gpt-5.6-sol' model requires a newer version of Codex`，
+> 指定 `-m gpt-5.1` 也拿不到 session。**要生插画得先升级 codex CLI。**
+> 在那之前，封面配图改用真实产品视觉（见 `04-assets.md` 取素材优先级）。
+
 ```bash
 SKILL=/Users/macmini003/.claude/skills/codex-image
 TMP=$(mktemp -d /tmp/codex-image-XXXXXX); RAW="$TMP/raw.png"

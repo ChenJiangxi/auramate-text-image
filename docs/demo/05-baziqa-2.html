@@ -23,11 +23,16 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
 .shotwrap{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin-top:34px;}
 .shot{width:100%;height:auto;max-height:100%;border-radius:26px;overflow:hidden;border:1px solid rgba(90,70,95,0.26);box-shadow:0 22px 54px rgba(60,40,70,0.26);}
 .shot img{width:100%;display:block;}
+/* 横构图截图放进竖版 slide，图和 foot 之间必然空一块 ——
+   用这段解读把它撑满。竖构图截图铺满高度时，把整个 .note 删掉。 */
+.note{font-size:34px;line-height:1.75;color:#4a4348;margin-top:30px;}
+.note .em{color:#6b3f8f;font-weight:500;}
 .foot{margin-top:34px;padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
   font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">
 <div class="kicker">模型测评 · 01</div>
 <div class="head">结果有点意外：<span class="em">通用模型全在下面</span></div>
 <div class="shotwrap"><div class="shot"><img src="assets/chart.png"/></div></div>
+<div class="note">蓝色三根是历届冠亚季军的成绩，橙色那根是灵伴，灰色是五个通用大模型。灵伴 <span class="em">37.1%</span> 排在通用模型全部之上、人类季军之下。</div>
 <div class="foot"><span>灵伴 AI · live benchmark</span><span>2022–2025 四届宏平均</span></div>
 </div></body></html>

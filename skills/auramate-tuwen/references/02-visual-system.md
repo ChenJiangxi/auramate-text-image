@@ -73,6 +73,10 @@
 
    竖构图插画裁成横带会切掉下方主体，用 `object-position:center 76%` 把背影/主体拉回画面。
    **换插图要重调这个百分比**，渲完肉眼确认主体在带子里。
+
+   **信息图（图表 / 产品截图）不能裁** —— 改用 `object-fit:contain` + 给 `.illo` 配一个
+   贴近图底色的背景。近方形的信息图（如雷达图）在 400px 横带里会缩得很小，
+   把横带加高到 **560px** 才看得清。
 2. **正文页** — kicker + 2–3 段正文 + footer。**每张写满字**，别一段一张、别大片留白
 3. **产品图页** — kicker + head(52) + 产品截图卡 + footer
 
@@ -90,6 +94,9 @@ box-shadow:0 22px 54px rgba(60,40,70,0.26);
 
 ⚠️ 容器一定要 `flex:1; min-height:0`。少了 `min-height:0`，portrait 截图按 `width:100%`
 会撑到 1900px 高，把上面的标题挤出画面 —— 深色压字风踩过这个坑。
+
+⚠️ **横构图截图放进竖版 slide，图和 foot 之间必然空一块。** `shot.html` 里有个可选的
+`.note` 解读段（34px）专门用来撑满 —— 顺便还多讲了一句内容。竖构图铺满高度时把 `.note` 删掉。
 
 模板文件 → `templates/editorial-gradient/{cover,body,shot,pair}.html`
 

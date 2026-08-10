@@ -10,8 +10,16 @@
    超了会自动折行、把手动断行冲掉（148px 配 8 字就爆了，实测过）。
 
    插图：底部横带 400px（画面 24%），margin:0 -88px 出血到左右边缘、不留圆角。
+
+   ⚠️ 横带里放什么，决定了用 cover 还是 contain：
+     氛围插画（可裁）→ object-fit:cover + object-position 调主体位置。默认。
+     信息图 / 产品截图（不可裁）→ .illo img{object-fit:contain} + 给 .illo 一个
+       跟图底色接近的背景。图表和截图是**信息**，裁掉一块就是残的。
+     踩过：benchmark 图和天赋雷达都按 cover 放进横带，柱子标签和顶点数字被切掉，
+     用户一眼看出来「插图被截得不完整」。
+
    object-position:center 45% —— 竖构图插画裁成横带会切掉下方主体，
-   这个值把背影/主体拉回画面。换插图要重调这个百分比。 */
+   这个值把主体拉回画面。换插图要重调这个百分比。 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',serif;color:#2b2620;overflow:hidden;}
@@ -36,7 +44,7 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
   font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">
 <div class="kicker">灵伴 AI · 新功能 · 旺运地图</div>
-<div class="titlewrap"><div class="title">在哪个城市，<br/>我会过得<br/><span class="em">松一点</span></div></div>
+<div class="titlewrap"><div class="title">在深圳待了六年，<br/>我一直以为<br/><span class="em">是我不够拼</span></div></div>
 <div class="illo"><img src="assets/geo-map.png"/></div>
 <div class="foot"><span>AURAMATE</span><span>auramate.net</span></div>
 </div></body></html>

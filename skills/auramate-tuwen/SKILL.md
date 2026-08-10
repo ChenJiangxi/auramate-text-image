@@ -8,7 +8,7 @@ description: |
   「这个选题做成图文」「帮我发小红书」；或任何要为 AuraMate / 灵伴 产出小红书内容的时候。
   触发词：小红书图文 / XHS / 灵伴 / AuraMate / 图文帖 / slide / 选题 / 发小红书 / 出一套图。
   子 skill：tuwen-narrative-essay · tuwen-knowledge-decode · tuwen-archetype-quiz ·
-  tuwen-feature-launch · tuwen-proof-benchmark · tuwen-campaign-giveaway ·
+  tuwen-feature-launch · tuwen-proof-benchmark · tuwen-campaign-contest ·
   tuwen-daily-sign · tuwen-seasonal。
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
@@ -65,7 +65,7 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 | **图鉴自测** | 10 种形态 / 12 种人格，让人对号入座 | `tuwen-archetype-quiz` | 8–12 |
 | **功能上新** | 新玩法上线、老功能大改 | `tuwen-feature-launch` | 4–6 |
 | **数据背书** | benchmark、对比测评、论文 | `tuwen-proof-benchmark` | 3–6 |
-| **抽奖活动** | 送积分 / 送报告 / 节点活动 | `tuwen-campaign-giveaway` | 2–4 |
+| **活动比赛** | 灵体大赏 · UGC 征集 · 送月度会员 | `tuwen-campaign-contest` | 2–4 |
 | **日签日更** | 每日灵签，低成本养号 | `tuwen-daily-sign` | 1–4 |
 | **节令热点** | 节气 / 新年 / 开工 / 生日月 | `tuwen-seasonal` | 4–8 |
 

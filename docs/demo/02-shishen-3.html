@@ -1,10 +1,7 @@
 <!doctype html><html><head><meta charset=utf-8><style>
-/* 模板 A · 渐变编辑风 —— 成对对比页  (2026-08-10)
-   知识解析型的核心页型：两个概念并排，靠对比讲清楚区别。
-   十神天然是五对（一个稳的、一个野的），一对一张，比一次列十个好读得多。
-
-   ⚠️ 左右两张必须是**各自对应的**真实形态图，不能拿同一张图充两个角色，
-      也不能随便找张好看的光球顶上 —— 图要能证明标题在说的那句话。 */
+/* 模板 A · 渐变编辑风 —— 正文页  (v2, 2026-08-10)
+   正文统一 44px / lh 1.9。每张写满 2-3 段，别一段一张、别大片留白。
+   .em 深梅紫强调；.en 英文词红棕斜体；.last 收尾段加粗一档。 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',serif;color:#2b2620;overflow:hidden;}
@@ -18,33 +15,20 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
 .frame > *{position:relative;z-index:1;}
 .kicker{font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;font-weight:500;letter-spacing:0.2em;color:#8d7d9e;
   padding-bottom:20px;border-bottom:1px solid rgba(90,70,95,0.16);}
-.head{font-size:52px;font-weight:900;line-height:1.34;color:#1a1420;margin-top:30px;}
-.head .em{color:#6b3f8f;}
-.pair{flex:1;display:flex;gap:34px;min-height:0;margin-top:36px;}
-.col{flex:1;display:flex;flex-direction:column;min-width:0;}
-.col .pic{flex:1;min-height:0;border-radius:22px;overflow:hidden;border:1px solid rgba(90,70,95,0.24);
-  box-shadow:0 16px 40px rgba(60,40,70,0.22);}
-.col .pic img{width:100%;height:100%;object-fit:cover;display:block;}
-.col .name{font-size:46px;font-weight:900;color:#1a1420;margin-top:26px;}
-.col .name .tag{font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:24px;font-weight:500;
-  color:#6b3f8f;letter-spacing:0.14em;margin-left:14px;vertical-align:0.22em;}
-.col .desc{font-size:34px;line-height:1.7;color:#4a4348;margin-top:14px;}
-.foot{margin-top:32px;padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
+.body{flex:1;font-size:44px;font-weight:400;line-height:1.9;color:#302c2e;margin-top:46px;}
+.body p{margin-bottom:38px;}
+.body p:last-child{margin-bottom:0;}
+.body .em{color:#6b3f8f;font-weight:500;}
+.body .en{color:#8a5a52;font-style:italic;}
+.body .last{font-weight:500;}
+.foot{padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
   font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">
-<div class="kicker">古人的十种状态</div>
-<div class="head">同样是<span class="em">往外给</span>，古人分成两种</div>
-<div class="pair">
-  <div class="col">
-    <div class="pic"><img src="assets/form-meishi.jpg"/></div>
-    <div class="name">美食日<span class="tag">正 · 稳</span></div>
-    <div class="desc">慢慢来，做点自己喜欢的事。<br/>力气是往外散的，但散得温和。</div>
-  </div>
-  <div class="col">
-    <div class="pic"><img src="assets/form-fafeng.jpg"/></div>
-    <div class="name">发疯日<span class="tag">偏 · 野</span></div>
-    <div class="desc">憋不住了，非得说点什么。<br/>同样是往外，这天是炸开的。</div>
-  </div>
+<div class="kicker">古人的十种状态 · 02</div>
+<div class="body">
+  <p>关系一共只有五类。因为古人拿来描述世界的那五种元素，两两之间只可能有五种关系：<span class="em">帮我的、我帮的、管我的、我管的、跟我一样的</span>。想不出第六种。</p>
+  <p>每一类再分成两个，分法是看<span class="em">阴阳同不同</span>。阴阳不同的那个，两边有牵引，作用直接、来得快；阴阳相同的那个，没这层牵引，劲儿要么更钝、要么走偏。</p>
+  <p><span class="last">五类乘二，正好十个。所以「十」不是古人凑了十个词，是这个结构算下来只能是十个。</span></p>
 </div>
-<div class="foot"><span>灵伴 AI · 每日形态</span><span>五对之二 · 往外给</span></div>
+<div class="foot"><span>灵伴 AI · AURAMATE</span><span>auramate.net</span></div>
 </div></body></html>

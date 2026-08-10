@@ -28,7 +28,9 @@ CARD_COVER = load('card-light/cover.html')
 CARD_BODY  = load('card-light/body.html')
 
 
-def cover(out, kicker, title_html, illo, title_px=132, illo_h=400, pos='center 76%'):
+def cover(out, kicker, title_html, illo, title_px=132, illo_h=400, pos='center 76%',
+          fit='cover', bg=None):
+    """fit='contain' + bg=底色：信息图/截图不可裁。默认 cover 只给氛围插画用。"""
     s = COVER
     s = s.replace('灵伴 AI · {{系列名}}', kicker)
     s = s.replace('{{标题第一行}}，<br/>{{标题第二行}}，<br/>{{第三行含}}<span class="em">{{accent词}}</span>', title_html)
@@ -39,6 +41,10 @@ def cover(out, kicker, title_html, illo, title_px=132, illo_h=400, pos='center 7
         s = s.replace('height:400px', 'height:%dpx' % illo_h)
     if pos != 'center 76%':
         s = s.replace('object-position:center 76%', 'object-position:%s' % pos)
+    if fit != 'cover':
+        s = s.replace('object-fit:cover', 'object-fit:%s' % fit)
+    if bg:
+        s = s.replace('.illo{height:%dpx' % illo_h, '.illo{background:%s;height:%dpx' % (bg, illo_h))
     write(out, s)
 
 
@@ -51,7 +57,8 @@ def body(out, kicker, paras):
     write(out, s)
 
 
-def shot(out, kicker, head_html, img, foot_l, foot_r, portrait=True):
+def shot(out, kicker, head_html, img, foot_l, foot_r, portrait=True, note=None):
+    """note: 横构图截图下方的解读段，用来填掉图和 foot 之间的空。竖图不用传。"""
     s = SHOT
     s = s.replace('{{系列名}} · 03', kicker)
     s = s.replace('{{一句说明}}，<span class="em">{{accent 部分}}</span>', head_html)
@@ -60,6 +67,10 @@ def shot(out, kicker, head_html, img, foot_l, foot_r, portrait=True):
     if not portrait:  # landscape / 近方图：铺满宽度
         s = s.replace('.shot{height:100%;', '.shot{width:100%;height:auto;max-height:100%;')
         s = s.replace('.shot img{height:100%;display:block;}', '.shot img{width:100%;display:block;}')
+    if note:
+        s = s.replace('{{横图才留这段解读，竖图删掉}}', note)
+    else:
+        s = s.replace('<div class="note">{{横图才留这段解读，竖图删掉}}</div>\n', '')
     write(out, s)
 
 
@@ -148,30 +159,42 @@ body('01-reframe-6.html', '低谷期 · 05', [
 
 # ════════════════════════════════════════════════════════════════
 # 02 · 十神解析（知识解析）
-#     ⚠️ 上一版是废稿：只说「有一套东西叫十神，我做成了产品」，没讲透任何概念，
-#        配图还拿同一张通用光球充两个角色。重写标准 —— 读者读完要能复述一个新知识点。
-#     真知识点 = 十种其实是五对，每对是同一件事的「稳」版和「野」版。
-#     ⚠️ 十个原名里「伤官」「印」是违禁词，一个都不写。只用形态名 + 「正/偏」这层结构讲。
+#     ⚠️ 前两版都是废稿。第一版只说「有这么个东西，我做成了产品」；第二版编了个
+#        「正=稳/偏=野」的分法当定义——用户：「八字里的十神概念是怎么样的？你这内容完全不符合」。
+#     真实结构（安全说法）：
+#       ① 十种是**关系**不是标签，相对「你自己」这个基准点算，换个基准点名字全变
+#       ② 关系只有五类，因为五种元素两两之间只可能有五种关系：
+#          帮我的 / 我帮的 / 管我的 / 我管的 / 跟我一样的
+#       ③ 每类按**阴阳同不同**再分二 → 五乘二正好十。「十」不是凑的，是算出来的
+#     ⚠️ 红线：「伤官」「印」「命主」「八字」一个都不写。「日主」也避（跟命主同险），
+#        改说「你自己那个基准点」。「阴阳」「五种元素」不违禁。
 # ════════════════════════════════════════════════════════════════
 cover('02-shishen-1.html', '灵伴 AI · 古人的十种状态 · 01',
-      '古人形容状态，<br/>分成五对，<br/>每对都有个<span class="em">失控版</span>',
+      '不是十种性格，<br/>是你和世界的<br/><span class="em">十种关系</span>',
       'assets/forms-strip.jpg', illo_h=420, pos='center 50%')
 
 body('02-shishen-2.html', '古人的十种状态 · 01', [
- '我们现在形容状态，词很少：忙、累、还行、emo。'
- '一千年前的人分得细得多——他们把人和外界的关系拆成<span class="em">五对</span>，一共十种。',
- '五对分别是：跟人<span class="em">并肩</span>、把东西<span class="em">往外给</span>、'
- '<span class="em">拿到</span>、被<span class="em">管着</span>、被<span class="em">托着</span>。'
- '每一对里还要再分一次——一个带「正」字，一个带「偏」字。',
- '「正」是稳的、走明路的；「偏」是野的、不按常理来的。'
- '同一件事，温和地发生和失控地发生，在他们眼里不是一回事，得给两个名字。'
- '<span class="last">这是这套东西里最值得学的一层：它承认同一种力有两张脸。</span>',
+ '很多人把这十个当性格标签用，像 MBTI 那样对号入座。但它<span class="em">根本不是标签，是关系</span>。',
+ '算出来的每一个名字，说的都是「某样东西对你」是什么关系——'
+ '基准点是<span class="em">你自己</span>。同一样东西，换个人来算，名字完全不同。'
+ '所以它没办法脱离你单独存在，也就没有「这个人是 XX 型」这种说法。',
+ '这是它和现代那些人格测试最不一样的地方：那些测的是你是谁，这个测的是你和外面的东西怎么接上。',
 ])
 
-pair('02-shishen-3.html', '古人的十种状态', '同样是<span class="em">往外给</span>，古人分成两种',
-     ('meishi', '美食日', '正 · 稳', '慢慢来，做点自己喜欢的事。<br/>力气是往外散的，但散得温和。'),
-     ('fafeng', '发疯日', '偏 · 野', '憋不住了，非得说点什么。<br/>同样是往外，这天是炸开的。'),
-     '灵伴 AI · 每日形态', '五对之二 · 往外给')
+body('02-shishen-3.html', '古人的十种状态 · 02', [
+ '关系一共只有五类。因为古人拿来描述世界的那五种元素，两两之间只可能有五种关系：'
+ '<span class="em">帮我的、我帮的、管我的、我管的、跟我一样的</span>。想不出第六种。',
+ '每一类再分成两个，分法是看<span class="em">阴阳同不同</span>。'
+ '阴阳不同的那个，两边有牵引，作用直接、来得快；'
+ '阴阳相同的那个，没这层牵引，劲儿要么更钝、要么走偏。',
+ '<span class="last">五类乘二，正好十个。所以「十」不是古人凑了十个词，'
+ '是这个结构算下来只能是十个。</span>',
+])
+
+pair('02-shishen-4.html', '古人的十种状态', '同样是<span class="em">我帮的</span>，阴阳同不同，出来两个样',
+     ('meishi', '美食日', '阴阳相同', '没牵引，劲儿泄得慢。<br/>慢慢做点自己喜欢的事。'),
+     ('fafeng', '发疯日', '阴阳相异', '有牵引，泄得又快又猛。<br/>憋不住，非得说点什么。'),
+     '灵伴 AI · 每日形态', '五类之二 · 我帮的')
 
 
 # ════════════════════════════════════════════════════════════════
@@ -211,7 +234,7 @@ card_body('03-tujian-12.html', '十种状态 · 收尾', '每天换一种',
 #     铁律：标题是痛点不是功能名；不许「重磅 / 上新 / 立即体验」
 # ════════════════════════════════════════════════════════════════
 cover('04-gongneng-1.html', '灵伴 AI · 新功能 · 旺运地图',
-      '在哪个城市，<br/>我会过得<br/><span class="em">松一点</span>',
+      '在深圳待了六年，<br/>我一直以为<br/><span class="em">是我不够拼</span>',
       'assets/geo-map.png', illo_h=430, pos='center 45%')
 
 body('04-gongneng-2.html', '旺运地图 · 01', [
@@ -225,7 +248,9 @@ body('04-gongneng-2.html', '旺运地图 · 01', [
 
 shot('04-gongneng-3.html', '旺运地图 · 02',
      '整张地图，<span class="em">每个人的都不一样</span>',
-     'assets/geo-map.png', '灵伴 AI · 旺运地图', '越红越舒展', portrait=False)
+     'assets/geo-map.png', '灵伴 AI · 旺运地图', '越红越舒展', portrait=False,
+     note='红的地方不是「那儿更好」，是<span class="em">那儿跟你更对得上</span>。'
+          '同一张地图，换个人算出来能差一大片——我自己这张，最红的一块正好是我一直没想过要去的地方。')
 
 
 # ════════════════════════════════════════════════════════════════
@@ -234,11 +259,13 @@ shot('04-gongneng-3.html', '旺运地图 · 02',
 # ════════════════════════════════════════════════════════════════
 cover('05-baziqa-1.html', '灵伴 AI · 模型测评 · 四届专家赛真题',
       '我们拿四届<br/>专家赛真题，<br/>考了<span class="em">五个大模型</span>',
-      'assets/chart.png', illo_h=440, pos='center 50%')
+      'assets/chart.png', illo_h=440, fit='contain', bg='#ffffff')
 
 shot('05-baziqa-2.html', '模型测评 · 01',
      '结果有点意外：<span class="em">通用模型全在下面</span>',
-     'assets/chart.png', '灵伴 AI · live benchmark', '2022–2025 四届宏平均', portrait=False)
+     'assets/chart.png', '灵伴 AI · live benchmark', '2022–2025 四届宏平均', portrait=False,
+     note='蓝色三根是历届冠亚季军的成绩，橙色那根是灵伴，灰色是五个通用大模型。'
+          '灵伴 <span class="em">37.1%</span> 排在通用模型全部之上、人类季军之下。')
 
 body('05-baziqa-3.html', '模型测评 · 02', [
  '说清楚口径，不然这张图没意义：题目是 2022 到 2025 四届全球专家赛的真题，'
@@ -255,8 +282,8 @@ body('05-baziqa-3.html', '模型测评 · 02', [
 # 06 · 使用教程（收藏率天花板）
 # ════════════════════════════════════════════════════════════════
 cover('06-jiaocheng-1.html', '灵伴 AI · 报告怎么读',
-      '这份报告<br/>我看了三遍<br/>才<span class="em">看懂</span>',
-      'assets/radar.png', illo_h=420, pos='center 40%')
+      '这份报告，<br/>看懂一个八边形<br/><span class="em">就够了</span>',
+      'assets/radar.png', illo_h=560, fit='contain', bg='#201d1b')
 
 shot('06-jiaocheng-2.html', '报告怎么读 · 01',
      '第一步：<span class="em">先看那个八边形</span>',
@@ -273,19 +300,22 @@ body('06-jiaocheng-3.html', '报告怎么读 · 02', [
 
 
 # ════════════════════════════════════════════════════════════════
-# 07 · 抽奖活动
-#     ⚠️ 必须走平台官方抽奖组件；不许「评论区扣」「私信我」
+# 07 · 灵体大赏（活动 · UGC 共创比赛）
+#     用户拍板：不办抽奖，办「灵体好看比赛」，奖品月度会员。
+#     比抽奖好在三处：产出 UGC、展示产品最美的部分、合规风险低得多
+#     （带话题 tag 正常发笔记 ≠ 引导评论）。
 # ════════════════════════════════════════════════════════════════
-cover('07-choujiang-1.html', '灵伴 AI · 抽奖 · 30 份深度报告',
-      '上个月有人问<br/>这报告长什么样，<br/>不如<span class="em">直接送</span>',
-      'assets/pentagon.png', illo_h=430, pos='center 50%')
+cover('07-dashang-1.html', '灵伴 AI · 灵体大赏 · 征集中',
+      '灵体大赏：<br/>谁的那颗<br/><span class="em">最好看</span>',
+      'assets/orbs-dashang.jpg', illo_h=420, pos='center 50%')
 
-body('07-choujiang-2.html', '抽奖 · 01', [
- '与其解释，不如直接给你们看。这次拿出 <span class="em">30 份</span>深度报告，'
- '用平台自带的抽奖功能开，<span class="em">我不经手</span>。',
- '报告里有五脏气机的平衡图、八个维度的天赋分布、还有一份按你出生时间算出来的年度节奏表。'
- '图 2 是其中一页，我自己那份。',
- '开奖之后我会单独发一条公示。没抽到也不要紧，这些功能本来就能自己去试。',
+body('07-dashang-2.html', '灵体大赏 · 01', [
+ '每个人的灵体都是按自己那份出生时间数据算出来的一颗，颜色、形状、亮的位置全不一样。'
+ '看得多了会发现，有些人的那颗<span class="em">是真的好看</span>。',
+ '所以办一次灵体大赏：带话题标签发一条自己的笔记，把你那颗放出来就行。'
+ '我们挑十个，各送<span class="em">一个月会员</span>。',
+ '<span class="last">不用在评论区做什么，也不用来找我，正常发笔记就行。'
+ '挑完发一条公示，把入选的十颗放一起——那张图应该会很好看。</span>',
 ])
 
 
@@ -294,11 +324,14 @@ body('07-choujiang-2.html', '抽奖 · 01', [
 # ════════════════════════════════════════════════════════════════
 cover('08-jieling-1.html', '灵伴 AI · 节气手记',
       '入伏这几天，<br/>身体最先<br/><span class="em">扛不住的地方</span>',
-      'assets/pentagon.png', illo_h=430, pos='center 50%')
+      'assets/wuyun-liuqi.jpg', illo_h=400, fit='contain', bg='#2a2624')
 
 shot('08-jieling-2.html', '节气手记 · 01',
      '五脏各有各的<span class="em">负载曲线</span>',
-     'assets/pentagon.png', '灵伴 AI · 五脏读数', '木肝 · 火心 · 土脾 · 金肺 · 水肾', portrait=False)
+     'assets/wuyun-cards.jpg', '灵伴 AI · 五脏读数', '木肝 · 火心 · 土脾 · 金肺 · 水肾', portrait=False,
+     note='左边这张标的是位置，右边那个五边形标的是<span class="em">负载</span>——'
+          '哪一角鼓出来就是这段时间使力最多的地方，凹下去的是撑不上劲的。'
+          '入伏这几天，多数人凹的是同一个角。')
 
 body('08-jieling-3.html', '节气手记 · 02', [
  '古人把一年切成二十四段，不是为了好看，是因为<span class="em">身体在每一段里的负载不一样</span>。'
