@@ -1,0 +1,20 @@
+node_modules/
+.DS_Store
+
+# post 工作目录：源码进仓库，渲染产物不进
+posts/**/*.png
+posts/**/*.jpg
+posts/**/*.jpeg
+posts/**/*.gif
+posts/**/*.mp4
+posts/**/assets/
+
+# image-safety hook 的临时 sidecar
+*.safe.png
+*.safe.jpg
+
+# 中间产物（用户讨厌文件冗余）
+*-v1.*
+*-v2.*
+*-v3.*
+*-base.*
