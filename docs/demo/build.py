@@ -17,6 +17,7 @@ def load(p):
 COVER = load('editorial-gradient/cover.html')
 BODY  = load('editorial-gradient/body.html')
 SHOT  = load('editorial-gradient/shot.html')
+PAIR  = load('editorial-gradient/pair.html')
 CARD_COVER = load('card-light/cover.html')
 CARD_BODY  = load('card-light/body.html')
 
@@ -53,6 +54,22 @@ def shot(out, kicker, head_html, img, foot_l, foot_r, portrait=True):
     if not portrait:  # landscape / 近方图：铺满宽度
         s = s.replace('.shot{height:100%;', '.shot{width:100%;height:auto;max-height:100%;')
         s = s.replace('.shot img{height:100%;display:block;}', '.shot img{width:100%;display:block;}')
+    write(out, s)
+
+
+def pair(out, kicker, head_html, left, right, foot_l, foot_r):
+    """left/right = (形态 id, 形态名, 标签, 一句话)"""
+    s = PAIR
+    s = s.replace('{{系列名}} · {{期号}}', kicker)
+    s = s.replace('{{这一对讲的是什么}}，<span class="em">{{分成两种}}</span>', head_html)
+    s = s.replace('assets/form-{{左}}.png', 'assets/form-%s.png' % left[0])
+    s = s.replace('assets/form-{{右}}.png', 'assets/form-%s.png' % right[0])
+    s = s.replace('{{左形态名}}', left[1]).replace('{{右形态名}}', right[1])
+    s = s.replace('<span class="tag">稳</span>', '<span class="tag">%s</span>' % left[2], 1)
+    s = s.replace('<span class="tag">野</span>', '<span class="tag">%s</span>' % right[2], 1)
+    s = s.replace('{{一句话，具体，说人话}}', left[3])
+    s = s.replace('{{一句话，跟左边形成对照}}', right[3])
+    s = s.replace('灵伴 AI · {{功能名}}', foot_l).replace('{{标注}}', foot_r)
     write(out, s)
 
 
@@ -103,26 +120,30 @@ shot('01-reframe-3.html', '低谷期 · 03',
 
 # ════════════════════════════════════════════════════════════════
 # 02 · 十神解析（知识解析）
-#     双壳：古人的十个词（文化）→ AI 灵体形态（科技）
-#     ⚠️ 「十神」全篇只出现 1 次且裹壳，绝不上封面
+#     ⚠️ 上一版是废稿：只说「有一套东西叫十神，我做成了产品」，没讲透任何概念，
+#        配图还拿同一张通用光球充两个角色。重写标准 —— 读者读完要能复述一个新知识点。
+#     真知识点 = 十种其实是五对，每对是同一件事的「稳」版和「野」版。
+#     ⚠️ 十个原名里「伤官」「印」是违禁词，一个都不写。只用形态名 + 「正/偏」这层结构讲。
 # ════════════════════════════════════════════════════════════════
 cover('02-shishen-1.html', '灵伴 AI · 古人的十种状态 · 01',
-      '古人用十个词，<br/>形容一个人<br/><span class="em">一天的状态</span>',
-      'assets/orb-dunwu.png', illo_h=440, pos='center 50%')
+      '古人形容状态，<br/>分成五对，<br/>每对都有个<span class="em">失控版</span>',
+      'assets/forms-strip.png', illo_h=420, pos='center 50%')
 
 body('02-shishen-2.html', '古人的十种状态 · 01', [
- '我们现在形容状态，词其实很少：忙、累、还行、emo。'
- '但一千年前的人不是这么记的——他们把一个人和外部的关系，拆成了<span class="em">十种姿势</span>。',
- '主动出击是一种，被人托着是一种，硬顶住是一种，憋不住要释放是一种，'
- '还有一种是伸手正好接住了掉下来的东西。'
- '这套东西在古书里叫「十神」，听着玄，其实是一张<span class="em">前心理学时代的状态分类表</span>。',
- '我把这十个词，做成了灵伴每天呈现的十种形态。'
- '今天你是哪一种，它自己会变——不用你填问卷，也不用你选心情。',
+ '我们现在形容状态，词很少：忙、累、还行、emo。'
+ '一千年前的人分得细得多——他们把人和外界的关系拆成<span class="em">五对</span>，一共十种。',
+ '五对分别是：跟人<span class="em">并肩</span>、把东西<span class="em">往外给</span>、'
+ '<span class="em">拿到</span>、被<span class="em">管着</span>、被<span class="em">托着</span>。'
+ '每一对里还要再分一次——一个带「正」字，一个带「偏」字。',
+ '「正」是稳的、走明路的；「偏」是野的、不按常理来的。'
+ '同一件事，温和地发生和失控地发生，在他们眼里不是一回事，得给两个名字。'
+ '<span class="last">这是这套东西里最值得学的一层：它承认同一种力有两张脸。</span>',
 ])
 
-shot('02-shishen-3.html', '古人的十种状态 · 02',
-     '第六种：<span class="em">顿悟日</span>',
-     'assets/orb-dunwu.png', '灵伴 AI · 每日形态', '表静脑闹 · 灵感冒头', portrait=False)
+pair('02-shishen-3.html', '古人的十种状态', '同样是<span class="em">往外给</span>，古人分成两种',
+     ('meishi', '美食日', '正 · 稳', '慢慢来，做点自己喜欢的事。<br/>力气是往外散的，但散得温和。'),
+     ('fafeng', '发疯日', '偏 · 野', '憋不住了，非得说点什么。<br/>同样是往外，这天是炸开的。'),
+     '灵伴 AI · 每日形态', '五对之二 · 往外给')
 
 
 # ════════════════════════════════════════════════════════════════
@@ -131,13 +152,13 @@ shot('02-shishen-3.html', '古人的十种状态 · 02',
 card_cover('03-tujian-1.html', '· 十种状态',
            '你今天<br/>是<span class="em">哪一种</span>',
            '十种形态全在下面，对号入座一下。我自己最常出现的是顿悟日。',
-           'assets/orb-dunwu.png')
+           'assets/form-dunwu.png')
 
 card_body('03-tujian-2.html', '十种状态 · 06 / 10', '顿悟日',
-          '表面上没动静，脑子里一直在转。<br/>灵感是这天冒出来的。', 'assets/orb-dunwu.png')
+          '表面上没动静，脑子里一直在转。<br/>灵感是这天冒出来的。', 'assets/form-dunwu.png')
 
 card_body('03-tujian-3.html', '十种状态 · 08 / 10', '压力日',
-          '弦是绷着的，但该争的得争。<br/>这天适合把硬话说完。', 'assets/orb-b.png')
+          '弦是绷着的，但该争的得争。<br/>这天适合把硬话说完。', 'assets/form-yali.png')
 
 
 # ════════════════════════════════════════════════════════════════

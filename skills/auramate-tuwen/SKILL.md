@@ -44,11 +44,13 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 - ✅ 可以放：产品的**视觉元素**（灵体光球 / K 线图 / 雷达图 / 干净 UI 状态）+ 你自己写的短句
 - ❌ 不能放：AI 长回答截图、满屏文字的报告页、任何读起来像广告的句子
 
-### 3. 灵体永远用产品真截图
+### 3. 配图必须又真又对题
 
-任何位置的灵体（封面 / 内页 / 角标）**必须**是产品里真跑出来的粒子云截图。不准 CSS radial-gradient 假球、不准 emoji、不准 mockup。用户原话：「永远不要用球体替代灵体。要有产品图呀」。
+**真**：任何位置的灵体（封面 / 内页 / 角标）必须是产品里真跑出来的粒子云截图。不准 CSS radial-gradient 假球、不准 emoji、不准 mockup。用户原话：「永远不要用球体替代灵体。要有产品图呀」。同理适用产品 UI、竞品 logo（对比图里 DeepSeek / Gemini / OpenAI 必须真 logo，不能用文字圆标）。
 
-同理适用：产品 UI、竞品 logo（对比图里 DeepSeek / Gemini / OpenAI 必须真 logo，不能用文字圆标）。
+**对题**：真实但不对题的图，跟假图一样是废稿。每张图放进去之前过三问 ——
+①这张图在证明标题的哪句话？②换张图这页会不会照样成立？③同一张图有没有在这篇里充两个角色？
+详见 `references/04-assets.md` 开头的「配图三问」（那里有一个真实翻车案例）。
 
 **完整红线词表 + 安全替换表 + 发布前 checklist → `references/01-redline.md`。发布前必须跑 `tools/redline-scan.sh`。**
 

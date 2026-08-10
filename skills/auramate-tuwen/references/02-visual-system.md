@@ -76,6 +76,10 @@
 2. **正文页** — kicker + 2–3 段正文 + footer。**每张写满字**，别一段一张、别大片留白
 3. **产品图页** — kicker + head(52) + 产品截图卡 + footer
 
+4. **成对对比页** — kicker + head(52) + 左右两栏（各一张图 + 名字 + 一句话）+ footer。
+   知识解析型的核心页型：靠对比讲清楚区别，比一次列十条好读。
+   **左右必须各用各的真实素材**，不能同一张图充两个角色。
+
 产品截图卡样式：
 ```css
 border-radius:26px; border:1px solid rgba(90,70,95,0.26);
@@ -87,7 +91,7 @@ box-shadow:0 22px 54px rgba(60,40,70,0.26);
 ⚠️ 容器一定要 `flex:1; min-height:0`。少了 `min-height:0`，portrait 截图按 `width:100%`
 会撑到 1900px 高，把上面的标题挤出画面 —— 深色压字风踩过这个坑。
 
-模板文件 → `templates/editorial-gradient/{cover,body,shot}.html`
+模板文件 → `templates/editorial-gradient/{cover,body,shot,pair}.html`
 
 ---
 
