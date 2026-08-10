@@ -1,0 +1,46 @@
+<!doctype html><html><head><meta charset=utf-8><style>
+/* 模板 A · 渐变编辑风 —— 文字封面（标题在上方，正文直接接着）
+   2026-08-10 用户给了参考排版：标题顶在上面、大号带色，下面直接进正文，
+   封面同时就是第一张内容页。适合**信息量大、不需要氛围图**的选题
+   （月度分享、知识长文、理念帖）。
+
+   跟 cover.html 的分工：
+     cover.html      标题居中 + 底部插图横带 —— 靠视觉抓人，适合情绪向
+     cover-text.html 标题在上 + 正文接着   —— 靠信息抓人，适合干货向
+
+   标题字号按每行字数：≤6 字 → 104；7–8 字 → 92；9–10 字 → 78。
+   （比图片封面小一档，因为下面还要放正文。）
+
+   ⚠️ 正文别写满：这一页标题占掉约 300px，正文安全区间 **150–200 字**。
+   超了 .body 会撑高把 footer 顶出画布 —— 跑 tools/check-fill.js 会报「写溢出」。 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',serif;color:#2b2620;overflow:hidden;}
+.frame{width:100%;height:100%;padding:88px 88px 74px;display:flex;flex-direction:column;position:relative;
+  background:
+    radial-gradient(120% 90% at 10% 2%, rgba(132,98,178,0.20) 0%, rgba(255,255,255,0) 54%),
+    radial-gradient(95% 72% at 98% 102%, rgba(228,152,92,0.18) 0%, rgba(255,255,255,0) 56%),
+    linear-gradient(108deg,#dccfef 0%,#e7d9e9 34%,#f0e2d7 64%,#f8dcc4 100%);}
+.frame::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0.42;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.18'/></svg>");}
+.frame > *{position:relative;z-index:1;}
+.kicker{font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;font-weight:500;letter-spacing:0.2em;color:#8d7d9e;
+  padding-bottom:20px;border-bottom:1px solid rgba(90,70,95,0.16);}
+.title{font-size:92px;font-weight:900;line-height:1.26;letter-spacing:-0.015em;color:#6b3f8f;margin-top:36px;}
+.title .em{color:#1a1420;}
+.body{flex:1;font-size:44px;font-weight:400;line-height:1.9;color:#302c2e;margin-top:44px;}
+.body p{margin-bottom:36px;}
+.body p:last-child{margin-bottom:0;}
+.body .em{color:#6b3f8f;font-weight:500;}
+.body .last{font-weight:500;}
+.foot{padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
+  font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
+</style></head><body><div class="frame">
+<div class="kicker">灵伴 AI · {{系列名}}</div>
+<div class="title">{{标题第一行}}<br/>{{标题第二行}}</div>
+<div class="body">
+  <p>{{开头第一段。直接进正文，不用铺垫。}}</p>
+  <p>{{第二段。150-200 字封顶，别写满。}}</p>
+</div>
+<div class="foot"><span>灵伴 AI · AURAMATE</span><span>auramate.net</span></div>
+</div></body></html>

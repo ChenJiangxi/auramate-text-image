@@ -9,6 +9,8 @@
  * 量的是 .body（正文页，flex:1 撑满的那块）：
  *   容器底部 - 最后一个子元素底部 = 空隙
  * 空隙 > 阈值就报 —— 说明这一张字没写够，不是排版问题，是文案短了。
+反过来也报：字写太多时 .body(flex:1) 会撑高，把 footer 顶出 1660 画布，
+品牌签和网址直接消失，而空隙照样是 0。只量空隙会漏掉这种，所以同时查 footer 位置。
  *
  * 封面 / 纯图页不检查（它们的空间由图占，本来就没有正文块）。
  */
@@ -59,7 +61,7 @@ if (!files.length) { console.error('没有可检查的 html'); process.exit(2); 
     await page.evaluate(() => document.fonts.ready).catch(() => {});
     await page.waitForTimeout(400);
 
-    const r = await page.evaluate(() => {
+    const r = await page.evaluate((H) => {
       // 只量 .body —— 它是 flex:1 撑满的正文块，空隙才有意义。
       // .note 是横图产品页下方的解读段，高度由内容决定，量不出「留白」。
       const box = document.querySelector('.body');
@@ -67,14 +69,22 @@ if (!files.length) { console.error('没有可检查的 html'); process.exit(2); 
       const bb = box.getBoundingClientRect();
       const last = box.children[box.children.length - 1].getBoundingClientRect();
       const text = (box.innerText || '').replace(/\s/g, '');
-      return { boxH: bb.height, gap: bb.bottom - last.bottom, chars: text.length };
-    });
+      // ⚠️ 溢出检测：写太多时 .body(flex:1) 会撑高，把 footer 顶出 1660 画布，
+      // 而空隙照样是 0 —— 只量空隙会报「填充 100%」，实际 footer 已经没了。
+      const foot = document.querySelector('.foot');
+      const footBottom = foot ? foot.getBoundingClientRect().bottom : 0;
+      return { boxH: bb.height, gap: bb.bottom - last.bottom, chars: text.length,
+               footBottom, overflow: foot ? Math.max(0, footBottom - H) : 0 };
+    }, H);
     if (!r) continue;                       // 封面 / 纯图页，跳过
     checked++;
 
     const fill = ((r.boxH - r.gap) / r.boxH * 100).toFixed(0);
     const name = path.basename(f);
-    if (r.gap > GAP_LIMIT) {
+    if (r.overflow > 1) {
+      bad.push({ name, over: Math.round(r.overflow), chars: r.chars });
+      console.log(`✗ ${name.padEnd(24)} 写溢出 ${Math.round(r.overflow)}px —— footer 被顶出画布  ${r.chars} 字`);
+    } else if (r.gap > GAP_LIMIT) {
       bad.push({ name, gap: Math.round(r.gap), fill, chars: r.chars });
       console.log(`✗ ${name.padEnd(24)} 填充 ${fill}%  底部空 ${Math.round(r.gap)}px  ${r.chars} 字`);
     } else {
@@ -86,9 +96,14 @@ if (!files.length) { console.error('没有可检查的 html'); process.exit(2); 
 
   console.log('────────────────────────────');
   if (bad.length) {
-    console.log(`${bad.length}/${checked} 张没写满（底部空隙 > ${GAP_LIMIT}px）`);
-    console.log('修法：**加字，不是改排版**。正文页 44px/lh1.9，每行约 24 字、每行占 84px，');
-    console.log('正文块可用高度约 1290px ≈ 15 行 ≈ 340 字。低于 260 字基本一定空。');
+    const over = bad.filter(b => b.over);
+    console.log(`${bad.length}/${checked} 张不合格`);
+    if (over.length) {
+      console.log(`  其中 ${over.length} 张**写溢出**：字太多，.body 撑高把 footer 顶出画布 ——`);
+      console.log('  品牌签和网址就没了。这种要**删字**，不是加字。');
+    }
+    console.log('  空的那些：加字，不是改排版。正文页 44px/lh1.9，每行约 24 字、每行占 84px，');
+    console.log('  正文块可用高度约 1290px ≈ 15 行。**安全区间 280–330 字**，超过 340 容易顶掉 footer。');
     process.exit(1);
   }
   console.log(`${checked} 张全部写满 ✓`);
