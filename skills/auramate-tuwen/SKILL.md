@@ -9,7 +9,7 @@ description: |
   触发词：小红书图文 / XHS / 灵伴 / AuraMate / 图文帖 / slide / 选题 / 发小红书 / 出一套图。
   子 skill：tuwen-narrative-essay · tuwen-knowledge-decode · tuwen-archetype-quiz ·
   tuwen-feature-launch · tuwen-proof-benchmark · tuwen-campaign-giveaway ·
-  tuwen-daily-sign · tuwen-user-story · tuwen-seasonal。
+  tuwen-daily-sign · tuwen-seasonal。
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
@@ -65,7 +65,6 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 | **数据背书** | benchmark、对比测评、论文 | `tuwen-proof-benchmark` | 3–6 |
 | **抽奖活动** | 送积分 / 送报告 / 节点活动 | `tuwen-campaign-giveaway` | 2–4 |
 | **日签日更** | 每日灵签，低成本养号 | `tuwen-daily-sign` | 1–4 |
-| **用户故事** | 真实反馈、用户来信 | `tuwen-user-story` | 4–6 |
 | **节令热点** | 节气 / 新年 / 开工 / 生日月 | `tuwen-seasonal` | 4–8 |
 
 选题库、发布配比、账号节奏 → `references/07-content-matrix.md`

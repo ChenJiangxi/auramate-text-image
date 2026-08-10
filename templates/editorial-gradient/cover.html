@@ -1,19 +1,29 @@
 <!doctype html><html><head><meta charset=utf-8><style>
-/* 模板 A · 渐变编辑风 —— 封面页
-   字号：短标题 82 / 长标题 66-68。手动 <br/> 断行，别拆词。
-   配图 codex-image 生成，放下半。 */
+/* 模板 A · 渐变编辑风 —— 封面页  (v2, 2026-08-10)
+   字号：短标题 82 / 长标题 74。手动 <br/> 断行，别拆词。
+   插图 codex-image 生成，object-fit:cover 铺满 —— 会裁掉上下边，
+   生图时 prompt 里让主体居中，别把关键元素顶在画面边缘。 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',serif;color:#2b2620;overflow:hidden;}
-.frame{width:100%;height:100%;padding:92px 96px 78px;display:flex;flex-direction:column;
-  background:linear-gradient(108deg,#e4dbee 0%,#ebe1ea 38%,#f1e7de 66%,#f6e5d6 100%);}
-.kicker{font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;font-weight:500;letter-spacing:0.2em;color:#9b8ea8;}
-.title{font-size:68px;font-weight:900;line-height:1.36;letter-spacing:-0.01em;color:#1e1824;margin-top:26px;}
-.title .em{color:#7a5a8a;}
-.illo{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin-top:12px;}
-.illo img{max-height:100%;max-width:540px;display:block;border-radius:14px;}
-.foot{padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
-  font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#a28f9a;letter-spacing:0.1em;}
+.frame{width:100%;height:100%;padding:88px 88px 74px;display:flex;flex-direction:column;position:relative;
+  background:
+    radial-gradient(120% 90% at 10% 2%, rgba(132,98,178,0.20) 0%, rgba(255,255,255,0) 54%),
+    radial-gradient(95% 72% at 98% 102%, rgba(228,152,92,0.18) 0%, rgba(255,255,255,0) 56%),
+    linear-gradient(108deg,#dccfef 0%,#e7d9e9 34%,#f0e2d7 64%,#f8dcc4 100%);}
+/* 纸感颗粒：让渐变看着是设计过的，不是渲染出来的带状色块 */
+.frame::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0.42;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.18'/></svg>");}
+.frame > *{position:relative;z-index:1;}
+.kicker{font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;font-weight:500;letter-spacing:0.2em;color:#8d7d9e;
+  padding-bottom:20px;border-bottom:1px solid rgba(90,70,95,0.16);}
+.title{font-size:74px;font-weight:900;line-height:1.32;letter-spacing:-0.015em;color:#1a1420;margin-top:34px;}
+.title .em{color:#6b3f8f;}
+.illo{flex:1;display:flex;align-items:flex-end;justify-content:center;min-height:0;margin-top:44px;}
+.illo img{width:100%;height:100%;object-fit:cover;display:block;border-radius:20px;
+  box-shadow:0 20px 48px rgba(72,48,92,0.20);}
+.foot{margin-top:38px;padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
+  font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">
 <div class="kicker">灵伴 AI · {{系列名}}</div>
 <div class="title">{{标题第一行}}，<br/>{{标题第二行}}，<br/>{{第三行含}}<span class="em">{{accent词}}</span></div>

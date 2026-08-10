@@ -1,10 +1,7 @@
 <!doctype html><html><head><meta charset=utf-8><style>
-/* 模板 A · 渐变编辑风 —— 产品截图页  (v2, 2026-08-10)
-   head 52px 说明标题 + 真实产品截图卡 + foot 数据标注。
-   截图必须完整、铺满、干净（无违禁词露出）。
-   portrait 手机图 → .shot{height:100%}（默认）
-   landscape/近方图 → .shot{width:100%;height:auto} + .shot img{width:100%;height:auto}
-   ⚠️ kicker/foot 用第一人称叙述，绝不写「真实产品截图」「产品 demo」。 */
+/* 模板 A · 渐变编辑风 —— 正文页  (v2, 2026-08-10)
+   正文统一 44px / lh 1.9。每张写满 2-3 段，别一段一张、别大片留白。
+   .em 深梅紫强调；.en 英文词红棕斜体；.last 收尾段加粗一档。 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',serif;color:#2b2620;overflow:hidden;}
@@ -18,16 +15,20 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
 .frame > *{position:relative;z-index:1;}
 .kicker{font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;font-weight:500;letter-spacing:0.2em;color:#8d7d9e;
   padding-bottom:20px;border-bottom:1px solid rgba(90,70,95,0.16);}
-.head{font-size:52px;font-weight:900;line-height:1.34;color:#1a1420;margin-top:30px;}
-.head .em{color:#6b3f8f;}
-.shotwrap{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin-top:34px;}
-.shot{height:100%;border-radius:26px;overflow:hidden;border:1px solid rgba(90,70,95,0.26);box-shadow:0 22px 54px rgba(60,40,70,0.26);}
-.shot img{height:100%;display:block;}
-.foot{margin-top:34px;padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
+.body{flex:1;font-size:44px;font-weight:400;line-height:1.9;color:#302c2e;margin-top:46px;}
+.body p{margin-bottom:38px;}
+.body p:last-child{margin-bottom:0;}
+.body .em{color:#6b3f8f;font-weight:500;}
+.body .en{color:#8a5a52;font-style:italic;}
+.body .last{font-weight:500;}
+.foot{padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
   font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">
-<div class="kicker">{{系列名}} · 03</div>
-<div class="head">{{一句说明}}，<span class="em">{{accent 部分}}</span></div>
-<div class="shotwrap"><div class="shot"><img src="assets/pf-chart.png"/></div></div>
-<div class="foot"><span>灵伴 AI · {{功能名}}</span><span>{{数据标注}}</span></div>
+<div class="kicker">低谷期 · 01</div>
+<div class="body">
+  <p>有一种人，心思特别细，一点风吹草动都能往心里去；小时候多半还带着点没消化的委屈；可偏偏又不甘心，心里一直憋着股劲，想做成点什么。<span class="em">高敏、带旧伤、又是个野心家</span>——这三样，常常长在同一个人身上。</p>
+  <p>顺的时候都还好。一到低谷就出事了：事情搞砸了，关系散了，钱也紧了。换别人，骂两句环境、怪两句运气，也就过去了。他不行。他只会往自己身上问——是不是我不够好，是不是又是我哪儿做错了。</p>
+  <p>一件坏事，他能翻来覆去地嚼很久，嚼到最后，结论永远是那一个：怪我。慢慢地，什么锅都成了他的。</p>
+</div>
+<div class="foot"><span>灵伴 AI · AURAMATE</span><span>auramate.net</span></div>
 </div></body></html>

@@ -15,26 +15,35 @@
 
 ## 模板 A · 渐变编辑风 ★ 定版主力
 
-**用在**：叙事随笔、知识解析、功能上新、用户故事、节令 —— 也就是绝大多数。
+**用在**：叙事随笔、知识解析、功能上新、节令 —— 也就是绝大多数。
 
 2026-07-01 用户大转向定下的模板（之前是深色风），已跑通 6 篇以上。**默认就用这套，别自己发明。**
 
 ### 色 / 字规格
 
 ```css
-背景  linear-gradient(108deg,#e4dbee 0%,#ebe1ea 38%,#f1e7de 66%,#f6e5d6 100%)
-      /* 淡紫 → 暖橘 柔和渐变。不是纯白，不是暖白 */
-正文字 #33302e      标题 #1e1824      紫色 accent .em #7a5a8a
-红棕 accent（英文词 / 强调）#8a5a52   kicker #9b8ea8   footer #a28f9a
+/* v2 (2026-08-10)：底色加深 + 两角柔光 + 纸感颗粒。
+   v1 的渐变太寡淡，中间发灰，看着像渲染出来的带状色块而不是设计。 */
+背景  radial-gradient(120% 90% at 10% 2%,  rgba(132,98,178,0.20) 0%, transparent 54%),
+      radial-gradient(95% 72% at 98% 102%, rgba(228,152,92,0.18) 0%, transparent 56%),
+      linear-gradient(108deg,#dccfef 0%,#e7d9e9 34%,#f0e2d7 64%,#f8dcc4 100%)
+颗粒  feTurbulence baseFrequency 0.85 / opacity 0.42 / mix-blend-mode multiply
+      （SVG data URI 内联在模板里，自包含，不依赖外部图）
+正文字 #302c2e      标题 #1a1420      紫 accent .em #6b3f8f
+红棕 accent（英文词）#8a5a52   kicker #8d7d9e   footer #9e8a99
 字体  正文 'Noto Serif SC'（宋体，文学感）
       kicker / footer 'Noto Sans SC'
+边距  88px（v1 是 96，收紧一点给内容让位）
 ```
+
+> accent 紫从 v1 的 `#7a5a8a` 换成 `#6b3f8f`。旧的太灰，读者看不出是刻意强调。
+> 想更醒目可以用 `#7b3fb0`，但会偏亮、跟水彩插画的柔调有点冲。
 
 ### 字号（只有这四档）
 
 | 元素 | 字号 | 说明 |
 |---|---|---|
-| 封面大标题 | **82**（短标题）/ **66–68**（长标题） | 要大要醒目，手动 `<br/>` 断行别拆词 |
+| 封面大标题 | **82**（短标题）/ **74**（长标题） | 要大要醒目，手动 `<br/>` 断行别拆词 |
 | 内页 head | **52** | 产品图页的说明标题 |
 | 正文 | **44** | 所有 slide 统一，line-height 1.9 |
 | kicker / footer | **26** | 灰紫小字，算 meta 不算正文 |
@@ -43,17 +52,23 @@
 
 ### 三种页型
 
-1. **封面页** — kicker + 大标题 + 插画（codex 生成，放下半）+ footer
+1. **封面页** — kicker + 分隔线 + 大标题 + 插画（codex 生成）+ footer。
+   插画 `width:100%;height:100%;object-fit:cover` **铺满内容区** —— v1 用 `max-width:540px`
+   只占了一半宽度，两侧和上方都是大白，正好犯了自己定的「不留白」。
+   代价是会裁掉上下边，生图时 prompt 要求主体居中。
 2. **正文页** — kicker + 2–3 段正文 + footer。**每张写满字**，别一段一张、别大片留白
 3. **产品图页** — kicker + head(52) + 产品截图卡 + footer
 
 产品截图卡样式：
 ```css
-border-radius:30px; border:1px solid rgba(90,70,95,0.28);
-box-shadow:0 22px 54px rgba(60,40,70,0.28);
-/* portrait 手机截图 → height:100% 居中 */
-/* landscape / 近方图 → width:100% 或 max-w/max-h:100% */
+border-radius:26px; border:1px solid rgba(90,70,95,0.26);
+box-shadow:0 22px 54px rgba(60,40,70,0.26);
+/* portrait 手机截图 → .shot{height:100%} 居中（默认） */
+/* landscape / 近方图 → .shot{width:100%;height:auto} + img 同 */
 ```
+
+⚠️ 容器一定要 `flex:1; min-height:0`。少了 `min-height:0`，portrait 截图按 `width:100%`
+会撑到 1900px 高，把上面的标题挤出画面 —— 深色压字风踩过这个坑。
 
 模板文件 → `templates/editorial-gradient/{cover,body,shot}.html`
 
