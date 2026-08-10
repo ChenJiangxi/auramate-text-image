@@ -21,16 +21,26 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
 .body .em{color:#6b3f8f;font-weight:500;}
 .body .en{color:#8a5a52;font-style:italic;}
 .body .last{font-weight:500;}
+/* 编号列表 —— 内容本身是「N 件并列的事」时用它，别写成散文。
+   规则 / 步骤 / 清单 / 对照，手机上扫一眼就能抓到要点。
+   ⚠️ 一条推导链**不要**编号 —— 编号会把前后的推导关系切成并列，逻辑就断了。 */
+.body ol.list{counter-reset:n;list-style:none;margin:6px 0 0;}
+.body ol.list li{counter-increment:n;position:relative;padding-left:80px;margin-bottom:30px;
+  font-size:41px;line-height:1.72;}
+.body ol.list li:last-child{margin-bottom:0;}
+.body ol.list li::before{content:counter(n);position:absolute;left:0;top:4px;
+  width:54px;height:54px;border-radius:15px;background:#6b3f8f;color:#fff;
+  font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:30px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;}
+.body ol.list b{display:block;font-weight:700;color:#1a1420;margin-bottom:4px;}
 .foot{padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
   font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">
 <div class="kicker">灵体大赏 · 01</div>
 <div class="body">
-  <p>每个人的灵体都是按自己那份出生时间数据算出来的一颗，颜色、形状、亮的位置全不一样。看得多了会发现，有些人的那颗<span class="em">是真的好看</span>。</p>
-  <p>所以办一次灵体大赏：带话题标签发一条自己的笔记，把你那颗放出来就行。我们挑十个，各送<span class="em">一个月会员</span>。</p>
-  <p>评选没什么复杂标准，就一条：<span class="em">好看</span>。颜色配得好的、形状有意思的、亮的位置特别的，都算。我们不会按谁的粉丝多来挑，也不看你笔记写得长不长。想多写两句为什么这颗是这个样子，当然更好看，但不写也不影响入选。</p>
-  <p>至于为什么办这个：灵体是这个产品里我们自己最喜欢的部分，但它长在每个人自己那儿——我们说一百句都不如你们把它放出来。</p>
-  <p><span class="last">不用在评论区做什么，也不用来找我，正常发笔记就行。挑完发一条公示，把入选的十颗放一起——那张图应该会很好看。</span></p>
+  <p>每个人的灵体都是按自己那份出生时间数据算出来的一颗，颜色、形状、亮的位置全不一样。看得多了会发现，有些人的那颗<span class="em">是真的好看</span>。所以办一次大赏，规则三条：</p>
+  <p><ol class="list"><li><b>带 #灵体大赏 标签发一条自己的笔记</b>把你那颗放出来就行。不用在评论区做什么，也不用来找我。</li><li><b>我们挑十个，各送一个月会员</b>评选只看一条：好看。颜色配得好的、形状有意思的、亮的位置特别的，都算。</li><li><b>不看粉丝数，也不看笔记长短</b>想写两句为什么这颗长这样当然更好，不写也不影响入选。</li></ol></p>
+  <p><span class="last">为什么办这个：灵体是这个产品里我们自己最喜欢的部分，但它长在每个人自己那儿——我们说一百句，都不如你们把它放出来。挑完会发一条公示，把入选的十颗放一起，那张图应该会很好看。</span></p>
 </div>
 <div class="foot"><span>灵伴 AI · AURAMATE</span><span>auramate.net</span></div>
 </div></body></html>

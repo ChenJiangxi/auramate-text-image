@@ -21,16 +21,27 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
 .body .em{color:#6b3f8f;font-weight:500;}
 .body .en{color:#8a5a52;font-style:italic;}
 .body .last{font-weight:500;}
+/* 编号列表 —— 内容本身是「N 件并列的事」时用它，别写成散文。
+   规则 / 步骤 / 清单 / 对照，手机上扫一眼就能抓到要点。
+   ⚠️ 一条推导链**不要**编号 —— 编号会把前后的推导关系切成并列，逻辑就断了。 */
+.body ol.list{counter-reset:n;list-style:none;margin:6px 0 0;}
+.body ol.list li{counter-increment:n;position:relative;padding-left:80px;margin-bottom:30px;
+  font-size:41px;line-height:1.72;}
+.body ol.list li:last-child{margin-bottom:0;}
+.body ol.list li::before{content:counter(n);position:absolute;left:0;top:4px;
+  width:54px;height:54px;border-radius:15px;background:#6b3f8f;color:#fff;
+  font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:30px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;}
+.body ol.list b{display:block;font-weight:700;color:#1a1420;margin-bottom:4px;}
 .foot{padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
   font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">
 <div class="kicker">节气手记 · 04</div>
 <div class="body">
-  <p>知道是脾在硬撑，这几天该怎么过就清楚了。</p>
-  <p><span class="em">少碰冰的</span>——热在体表、里头本来就是凉的，一杯冰饮下去，最先受不了的就是它。<br/><span class="em">把午觉睡回来</span>——长夏最耗的是白天那段，补在中午比熬到晚上有用。<br/><span class="em">出微汗就行</span>——出汗是散湿的，但汗出大了力气也跟着走。</p>
-  <p>三件事都是常识，没有一件是玄的。区别只在于：<span class="em">平时做不做无所谓，这十几天做不做，体感差很多。</span></p>
-  <p>也不用把它当成必须完成的任务。知道这几天身体在硬撑，把要求往下调一档就够了——该慢的时候慢，别硬跟自己较劲。</p>
-  <p><span class="last">你觉得累，真的不是你懒——是这段时间它本来就难。</span></p>
+  <p>知道是脾在硬撑，这几天该怎么过就清楚了。三件事，都是常识：</p>
+  <p><ol class="list"><li><b>少碰冰的</b>热在体表、里头本来就是凉的，一杯冰饮下去，最先受不了的就是它。</li><li><b>把午觉睡回来</b>长夏最耗的是白天那段，补在中午比熬到晚上有用。</li><li><b>出微汗就行，别练到大汗</b>出汗是散湿的，但汗出大了，力气也跟着走。</li></ol></p>
+  <p>三件都不玄。区别只在于：平时做不做无所谓，<span class="em">这十几天做不做，体感差很多</span>。</p>
+  <p>也不用把它当成任务。知道这几天身体在硬撑，把对自己的要求往下调一档就够了——该慢的时候慢，别硬跟自己较劲。<span class="last">你觉得累，真的不是你懒——是这段时间它本来就难。</span></p>
 </div>
 <div class="foot"><span>灵伴 AI · AURAMATE</span><span>auramate.net</span></div>
 </div></body></html>

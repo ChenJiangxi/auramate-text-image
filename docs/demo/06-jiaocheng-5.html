@@ -21,6 +21,18 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
 .body .em{color:#6b3f8f;font-weight:500;}
 .body .en{color:#8a5a52;font-style:italic;}
 .body .last{font-weight:500;}
+/* 编号列表 —— 内容本身是「N 件并列的事」时用它，别写成散文。
+   规则 / 步骤 / 清单 / 对照，手机上扫一眼就能抓到要点。
+   ⚠️ 一条推导链**不要**编号 —— 编号会把前后的推导关系切成并列，逻辑就断了。 */
+.body ol.list{counter-reset:n;list-style:none;margin:6px 0 0;}
+.body ol.list li{counter-increment:n;position:relative;padding-left:80px;margin-bottom:30px;
+  font-size:41px;line-height:1.72;}
+.body ol.list li:last-child{margin-bottom:0;}
+.body ol.list li::before{content:counter(n);position:absolute;left:0;top:4px;
+  width:54px;height:54px;border-radius:15px;background:#6b3f8f;color:#fff;
+  font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:30px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;}
+.body ol.list b{display:block;font-weight:700;color:#1a1420;margin-bottom:4px;}
 .foot{padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
   font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">

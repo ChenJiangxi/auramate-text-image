@@ -21,15 +21,26 @@ html,body{width:1242px;height:1660px;font-family:'Noto Serif SC','Songti SC',ser
 .body .em{color:#6b3f8f;font-weight:500;}
 .body .en{color:#8a5a52;font-style:italic;}
 .body .last{font-weight:500;}
+/* 编号列表 —— 内容本身是「N 件并列的事」时用它，别写成散文。
+   规则 / 步骤 / 清单 / 对照，手机上扫一眼就能抓到要点。
+   ⚠️ 一条推导链**不要**编号 —— 编号会把前后的推导关系切成并列，逻辑就断了。 */
+.body ol.list{counter-reset:n;list-style:none;margin:6px 0 0;}
+.body ol.list li{counter-increment:n;position:relative;padding-left:80px;margin-bottom:30px;
+  font-size:41px;line-height:1.72;}
+.body ol.list li:last-child{margin-bottom:0;}
+.body ol.list li::before{content:counter(n);position:absolute;left:0;top:4px;
+  width:54px;height:54px;border-radius:15px;background:#6b3f8f;color:#fff;
+  font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:30px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;}
+.body ol.list b{display:block;font-weight:700;color:#1a1420;margin-bottom:4px;}
 .foot{padding-top:22px;border-top:1px solid rgba(90,70,95,0.18);display:flex;justify-content:space-between;align-items:center;
   font-family:'Noto Sans SC','PingFang SC',sans-serif;font-size:26px;color:#9e8a99;letter-spacing:0.1em;}
 </style></head><body><div class="frame">
 <div class="kicker">我们怎么想的 · 03</div>
 <div class="body">
-  <p>有几条我们给自己定的规矩，一直没改过：</p>
-  <p><span class="em">不做坏消息的预告。</span>我们不告诉你哪天会出事。<br/><span class="em">不说「你注定如何」。</span>每个结论都要带上它成立的条件。<br/><span class="em">你说不准，我们记下来。</span>反馈会让它调整对你的认知。<br/><span class="em">你说准，我们反而警惕。</span>要查它是不是在讨好你。</p>
-  <p>第四条是最容易被忽略的。一个总说你爱听的话的东西，短期让人上瘾，长期什么用都没有——你从它那儿只能听到你已经相信的事。</p>
-  <p>所以我们会专门去看那些「用户说很准」的样本：是真的对上了，还是它说得足够模糊，让人自己填进去了？<span class="last">后一种在这个行业里太常见了，常见到几乎成了行业标准。我们不想做那个——一个只会附和你的东西，你迟早会不再问它。</span></p>
+  <p>有四条我们给自己定的规矩，一直没改过：</p>
+  <p><ol class="list"><li><b>不做坏消息的预告</b>不告诉你哪天会出事。</li><li><b>不说「你注定如何」</b>每个结论都要带上它成立的条件。</li><li><b>你说不准，我们记下来</b>反馈会让它调整对你的认知。</li><li><b>你说准，我们反而警惕</b>要去查它是不是在讨好你。</li></ol></p>
+  <p>第四条最容易被忽略。我们会专门去看「用户说很准」的样本：是真的对上了，还是它说得足够模糊、让人自己填进去了？<span class="last">后一种在这行太常见，常见到几乎成了标准。我们不想做那个——一个只会附和你的东西，你迟早会不再问它。</span></p>
 </div>
 <div class="foot"><span>灵伴 AI · AURAMATE</span><span>auramate.net</span></div>
 </div></body></html>
