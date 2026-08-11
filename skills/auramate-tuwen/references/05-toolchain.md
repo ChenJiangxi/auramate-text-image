@@ -110,6 +110,26 @@ lsof -iTCP -sTCP:LISTEN -P | grep :3000
 
 参考脚本：`ops-bilibili/projects/auramate-bilibili/v3-plugins/clips/scripts/explore-metamate.js`
 
+### 要「手机截图」形状的（拼贴页 / 模板 D 用）
+
+上面那套出的是 3840×2160 横图，摆进拼贴页里不是手机形状。要手机形状换 viewport：
+
+```js
+newContext({ viewport:{width:430,height:932}, deviceScaleFactor:2,
+             locale:'zh-CN', isMobile:true, hasTouch:true })   // → 860×1864
+```
+
+**要「问答」那种截图就真去问一遍**，别拿旧图凑：`fill()` 把问题打进输入框 → 截一张
+（这张就是「问题条」素材）→ `press('Enter')` → 轮询 `document.body.innerText.length`，
+连续 4 次不变且 >300 就算收敛 → 再截。整套见
+`playbook/posts/post-tiangan-tujian/capture.js` + `capture-chat.js`。
+
+**踩到的（2026-08-12）**：
+- `/play/mbti-personality` **整页不能用** —— 标题就是「MBTI 命格解析」，副标题「融合八字命理…」，
+  卡片里还有「基于八字命盘推测」。三个违禁词一屏占全，裁不出干净局部。
+- `/play/personality-flow` 之类没生成过的功能只是「开始生成」起始页，没内容可截。
+- 首页（`/app`）反而最好用：真实灵体 + 当天那条消息 + 输入框，一张顶三张。
+
 ---
 
 ## 四、图像处理（本机踩过的坑）
