@@ -30,16 +30,19 @@ cd posts/post-{slug} && node render.js
 
 skill 在 `~/.claude/skills/codex-image`。前提：`codex login status` = Logged in via ChatGPT；`codex features list | grep image_generation` = stable true。
 
-> ⚠️ **2026-08-10 实测本机 codex 已不可用**：登录状态正常、`image_generation` 也显示 stable，
-> 但实际调用返回 `The 'gpt-5.6-sol' model requires a newer version of Codex`，
-> 指定 `-m gpt-5.1` 也拿不到 session。**要生插画得先升级 codex CLI。**
-> 在那之前，封面配图改用真实产品视觉（见 `04-assets.md` 取素材优先级）。
+> ✅ **2026-08-12 已解开**（此前 08-10 记为「本机 codex 不可用」）。根因不是 codex 坏了，是
+> **本机 codex 0.135.0 配不上默认模型** `gpt-5.6-sol` → 400
+> `The 'gpt-5.6-sol' model requires a newer version of Codex`。
+> ChatGPT 账号只认 models 列表里的 slug，`-m gpt-5.1` / `gpt-5` / `gpt-5.1-codex` 一律
+> `not supported when using Codex with a ChatGPT account`，所以当时误判成整个工具挂了。
+> **修法：显式 `-m gpt-5.5`**（models 列表里 `minimal_client_version: 0.124.0`，0.135 带得动）。
+> 升级 codex CLI 之后可以把这个 `-m` 去掉。
 
 ```bash
 SKILL=/Users/macmini003/.claude/skills/codex-image
 TMP=$(mktemp -d /tmp/codex-image-XXXXXX); RAW="$TMP/raw.png"
 codex exec --sandbox workspace-write --skip-git-repo-check --color never \
-  --add-dir /Users/macmini003/.codex/generated_images -C "$TMP" \
+  -m gpt-5.5 --add-dir /Users/macmini003/.codex/generated_images -C "$TMP" \
   - <<'PROMPT' 2>&1 | tee "$TMP/stdout.log" | tail -8
 Use the image_gen tool exactly once to generate a single image for the description below. Do not write files, run shell, write code, or report paths — just generate.
 
@@ -63,6 +66,28 @@ SESS=$(find ~/.codex/sessions -name "rollout-*${SID}*.jsonl" | head -1); [ -n "$
 - **出完关会话**（用户明确要求）
 
 插画风格约定：暖色调、编辑感、无字、抽象或背影人物，跟渐变模板的淡紫暖橘对得上。
+
+### 要一组「贴纸式」透明插画（图鉴 / 十种形态那类）
+
+2026-08-12 十天干图鉴出了十张角色插画，三条必须做的：
+
+1. **透明底不要指望 `image_gen` 的原生 alpha。** prompt 里写死
+   `Background must be SOLID FLAT MAGENTA #FF00FF, completely uniform, no vignette,
+   no gradient, no texture, no ground shadow`，再本地去背：
+   ```bash
+   /usr/bin/python3 $SKILL/scripts/chroma_key_transparent.py \
+     --input "$RAW" --out assets/x.png --key magenta
+   ```
+   看输出的 `stale_transparent_rgb_pixels=0` 才算干净，非 0 = 浅底上会有粉边。
+2. **裁 alpha 包围盒，否则十张大小不齐。** 每张周围留白量不一样，塞进同一个盒子
+   配 `object-fit:contain`，显示尺寸能差一倍（癸只有戊的一半）。
+   `Image.split()[3].point(lambda a: 255 if a>8 else 0).getbbox()` 裁一遍再排版。
+   注意用 `/usr/bin/python3`（brew 的 python3 没 PIL）。
+3. **画风统一靠一段共用 STYLE 后缀**，不是靠 `-i` 传参考图 —— 十张分别生成，
+   把「厚棕描边扁平卡通 / 点眼腮红 / 柔和土调 / 整个人留边距居中」写成固定尾巴拼在每条描述后面，
+   一次成，十张能摆在同一张封面里不违和。范例：`playbook/posts/post-tiangan-tujian/gen-illo.sh`。
+
+三张一批并发跑（`gen-all.sh`），十张约 5 分钟。
 
 ---
 
